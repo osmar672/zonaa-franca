@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Gestión de Tarjetas y Tareas</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Operaciones y Control de Tareas</h1>
+
+  <!-- 1. Revisar detalles de la tarjeta -->
+  <section>
+    <h2>Revisar Detalles de la Tarjeta</h2>
+    <div>
+      <label for="cardSelect">Seleccionar Tarjeta de Operación / Expediente:</label>
+      <select id="cardSelect" onchange="reviewCardDetails()">
+        <option value="CARD-101">CARD-101: Importación de Componentes Electrónicos</option>
+        <option value="CARD-102">CARD-102: Inspección Bodega B-04</option>
+      </select>
+    </div>
+
+    <h3>Detalles de la Tarjeta</h3>
+    <div id="cardDetailsContainer">
+      <p>Seleccione una tarjeta para revisar sus detalles.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 2. Definir tareas requeridas -->
+  <section>
+    <h2>Definir Tareas Requeridas</h2>
+    <div>
+      <label for="taskTitle">Título de la Tarea:</label>
+      <input type="text" id="taskTitle" value="Validar DUA (Declaración Única Aduanera)">
+    </div>
+
+    <div>
+      <label for="assignee">Asignado a:</label>
+      <input type="text" id="assignee" value="Agente Aduanal - Luis Mora">
+    </div>
+
+    <button onclick="defineRequiredTask()">Definir Tarea Requerida</button>
+  </section>
+
+  <hr>
+
+  <!-- 3. Completar trabajo asignado -->
+  <section>
+    <h2>Completar Trabajo Asignado</h2>
+    <div>
+      <label for="taskSelect">Tareas Asignadas:</label>
+      <select id="taskSelect">
+        <option value="">No hay tareas definidas</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="completionNotes">Notas de Ejecución / Observaciones:</label>
+      <textarea id="completionNotes" rows="2" cols="40">Verificación documental completada sin discrepancias de arancel.</textarea>
+    </div>
+
+    <button onclick="completeAssignedWork()">Completar Trabajo Asignado</button>
+  </section>
+
+  <hr>
+
+  <!-- 4. Verificar finalización -->
+  <section>
+    <h2>Verificar Finalización</h2>
+    <button onclick="verifyCompletion()">Verificar Finalización de Trabajos</button>
+
+    <h3>Estado de Verificación:</h3>
+    <div id="verificationResult">Sin verificar.</div>
+  </section>
+
+  <hr>
+
+  <!-- Consola de Log -->
+  <section>
+    <h2>Registro de Actividad (Log)</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/gestion.js"></script>
+</body>
+</html>
