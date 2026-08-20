@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal B2B - Gestión de Trámites</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Portal de Gestión de Trámites B2B</h1>
+
+    <section>
+        <h2>Control de Acceso</h2>
+
+        <label for="roleSelector">Usuario activo:</label>
+
+        <select id="roleSelector">
+            <option value="empresa">Empresa - Corporación ABC</option>
+            <option value="analista">Analista - Zona Franca Norte</option>
+            <option value="auditor">Auditor - Auditoría General</option>
+        </select>
+
+        <p>
+            <strong>Usuario:</strong>
+            <span id="activeUser"></span>
+        </p>
+
+        <p>
+            <strong>Rol:</strong>
+            <span id="activeRole"></span>
+        </p>
+
+        <p>
+            <strong>Alcance:</strong>
+            <span id="accessScope"></span>
+        </p>
+    </section>
+</header>
+
+<hr>
+
+<main>
+
+    <section id="dashboardSection">
+        <h2>Dashboard Principal</h2>
+
+        <fieldset>
+            <legend>Resumen en tiempo real</legend>
+
+            <p>
+                Total de solicitudes recibidas:
+                <strong id="totalRequests">0</strong>
+            </p>
+
+            <p>
+                Porcentaje de aprobación:
+                <strong id="approvalRate">0%</strong>
+            </p>
+
+            <p>
+                Tiempo medio de respuesta:
+                <strong id="averageResponseTime">0 horas</strong>
+            </p>
+        </fieldset>
+    </section>
+
+    <hr>
+
+    <section id="formSection">
+        <h2>Gestión de Solicitudes</h2>
+
+        <form id="requestForm">
+
+            <input type="hidden" id="requestId">
+
+            <fieldset>
+                <legend>Datos del trámite</legend>
+
+                <p>
+                    <label for="companyName">Empresa:</label>
+                    <input
+                        type="text"
+                        id="companyName"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="requestType">
+                        Tipo de trámite:
+                    </label>
+
+                    <select id="requestType" required>
+                        <option value="">Seleccione</option>
+                        <option value="Importación">Importación</option>
+                        <option value="Exportación">Exportación</option>
+                        <option value="Permiso especial">
+                            Permiso especial
+                        </option>
+                        <option value="Registro comercial">
+                            Registro comercial
+                        </option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="zone">
+                        Zona Franca:
+                    </label>
+
+                    <select id="zone" required>
+                        <option value="Zona Franca Norte">
+                            Zona Franca Norte
+                        </option>
+
+                        <option value="Zona Franca Sur">
+                            Zona Franca Sur
+                        </option>
+
+                        <option value="Zona Franca Central">
+                            Zona Franca Central
+                        </option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="description">
+                        Descripción:
+                    </label>
+                </p>
+
+                <textarea
+                    id="description"
+                    rows="4"
+                    cols="60"
+                    required
+                ></textarea>
+
+                <p>
+                    <label for="aiDecision">
+                        Decisión sugerida por IA:
+                    </label>
+
+                    <select id="aiDecision">
+                        <option value="Aprobado">
+                            Aprobado
+                        </option>
+
+                        <option value="Rechazado">
+                            Rechazado
+                        </option>
+
+                        <option value="Revisión manual">
+                            Revisión manual
+                        </option>
+                    </select>
+                </p>
+
+                <p id="decisionContainer">
+                    <label for="finalDecision">
+                        Decisión final:
+                    </label>
+
+                    <select id="finalDecision">
+                        <option value="Pendiente">
+                            Pendiente
+                        </option>
+
+                        <option value="Aprobado">
+                            Aprobado
+                        </option>
+
+                        <option value="Rechazado">
+                            Rechazado
+                        </option>
+
+                        <option value="Revisión manual">
+                            Revisión manual
+                        </option>
+                    </select>
+                </p>
+
+                <button
+                    type="submit"
+                    id="saveRequestButton"
+                >
+                    Guardar solicitud
+                </button>
+
+                <button
+                    type="button"
+                    id="cancelEditButton"
+                    hidden
+                >
+                    Cancelar edición
+                </button>
+
+            </fieldset>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Listado de Solicitudes</h2>
+
+        <p id="permissionMessage"></p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Empresa</th>
+                    <th>Tipo</th>
+                    <th>Zona</th>
+                    <th>Descripción</th>
+                    <th>IA</th>
+                    <th>Decisión final</th>
+                    <th>Estado</th>
+                    <th>Fecha creación</th>
+                    <th>Fecha resolución</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="requestsTableBody"></tbody>
+        </table>
+    </section>
+
+    <hr>
+
+    <section id="auditSection">
+        <h2>Registro de Auditoría</h2>
+
+        <p>
+            Los registros son inmutables y no pueden editarse
+            desde la interfaz.
+        </p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Fecha y hora</th>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Acción</th>
+                    <th>Detalle</th>
+                    <th>Decisión IA modificada</th>
+                </tr>
+            </thead>
+
+            <tbody id="auditTableBody"></tbody>
+        </table>
+    </section>
+
+</main>
+
+<hr>
+
+<footer>
+    <p>
+        Prototipo B2B - Gestión de trámites y auditoría.
+    </p>
+</footer>
+
+<script src="../js/Seguridad, Bitácora y Métricas.js"></script>
+
+</body>
+</html>
