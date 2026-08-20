@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Alertas de Inventario</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Sistema de Notificaciones</h1>
+
+  <!-- Configurar notificaciones automáticas en tiempo real -->
+  <section>
+    <h2>1. Configuración de Notificaciones Automáticas (Tiempo Real)</h2>
+    <p>Estado de la conexión:</p>
+    <div id="wsStatus">Desconectado</div>
+    <button id="btnToggleWS" onclick="toggleRealTime()">Conectar Tiempo Real</button>
+  </section>
+
+  <hr>
+
+  <!-- Definir eventos de stock, umbrales y alertas -->
+  <section>
+    <h2>2. Reglas de Stock y Umbrales de Inventario</h2>
+    
+    <div>
+      <label for="prodName">Producto en Zona Franca:</label>
+      <input type="text" id="prodName" value="Lote de Microchips #882">
+    </div>
+
+    <div>
+      <label for="prodStock">Stock Actual:</label>
+      <input type="number" id="prodStock" value="12">
+    </div>
+
+    <!-- Establecer umbrales mínimos de inventario -->
+    <div>
+      <label for="minThreshold">Umbral Mínimo de Inventario:</label>
+      <input type="number" id="minThreshold" value="25">
+    </div>
+
+    <!-- Configurar alertas de productos próximos a vencer -->
+    <div>
+      <label for="expiryDays">Días para Vencimiento:</label>
+      <input type="number" id="expiryDays" value="4">
+    </div>
+
+    <div>
+      <label for="expiryThreshold">Umbral Alerta de Vencimiento (Días):</label>
+      <input type="number" id="expiryThreshold" value="10">
+    </div>
+
+    <!-- Configurar alertas de reabastecimiento requerido -->
+    <div>
+      <label for="reorderStatus">Estado de Reabastecimiento:</label>
+      <select id="reorderStatus">
+        <option value="OK">OK</option>
+        <option value="PENDIENTE">PENDIENTE</option>
+        <option value="REQUERIDO" selected>REQUERIDO</option>
+      </select>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Probar el envío y validar alertas -->
+  <section>
+    <h2>3. Prueba y Validación de Alertas</h2>
+    <button onclick="testSendNotification()">Probar Envío de Notificaciones</button>
+    <button onclick="validateAlerts()">Validar Recepción Correcta de Alertas</button>
+
+    <h3>Resultado de Validación:</h3>
+    <div id="validationResult">Esperando prueba...</div>
+  </section>
+
+  <hr>
+
+  <!-- Registro/Consola de Eventos -->
+  <section>
+    <h2>Registro de Notificaciones Recibidas</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/alertas.js"></script>
+</body>
+</html>
