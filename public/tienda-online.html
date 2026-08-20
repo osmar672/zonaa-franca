@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Atención en Mostrador</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Sistema de Atención en Mostrador</h1>
+    <p>Cotización, ventas, inventario y emisión de tickets</p>
+
+    <nav>
+        <a href="#catalogo">Catálogo</a> |
+        <a href="#cotizacion">Cotización</a> |
+        <a href="#venta">Venta</a> |
+        <a href="#ticket">Ticket</a> |
+        <a href="#operaciones">Operaciones</a>
+    </nav>
+</header>
+
+<main>
+
+    <section id="catalogo">
+        <h2>Catálogo e Inventario</h2>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Stock disponible</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaInventario"></tbody>
+        </table>
+
+        <h3>Agregar producto a cotización</h3>
+
+        <form id="formProducto">
+
+            <p>
+                <label for="producto">Producto:</label>
+
+                <select id="producto" required>
+                    <option value="">Seleccione un producto</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="cantidad">Cantidad:</label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="1"
+                    step="1"
+                    value="1"
+                    required
+                >
+            </p>
+
+            <p>
+                <strong>Stock disponible:</strong>
+                <span id="stockDisponible">-</span>
+            </p>
+
+            <p>
+                <strong>Stock restante estimado:</strong>
+                <span id="stockRestante">-</span>
+            </p>
+
+            <button type="submit">
+                Agregar a cotización
+            </button>
+
+        </form>
+    </section>
+
+    <hr>
+
+    <section id="cotizacion">
+
+        <h2>Cotización actual</h2>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio unitario</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaCotizacion"></tbody>
+        </table>
+
+        <h3>Resumen</h3>
+
+        <p>
+            <strong>Subtotal:</strong>
+            <span id="subtotal">$0.00</span>
+        </p>
+
+        <p>
+            <strong>IVA (16%):</strong>
+            <span id="impuestos">$0.00</span>
+        </p>
+
+        <p>
+            <strong>Total:</strong>
+            <span id="total">$0.00</span>
+        </p>
+
+        <button type="button" id="vaciarCotizacion">
+            Vaciar cotización
+        </button>
+
+    </section>
+
+    <hr>
+
+    <section id="venta">
+
+        <h2>Procesamiento de venta</h2>
+
+        <form id="formVenta">
+
+            <fieldset>
+                <legend>Método de pago</legend>
+
+                <p>
+                    <label>
+                        <input
+                            type="radio"
+                            name="metodoPago"
+                            value="Efectivo"
+                            required
+                        >
+                        Efectivo
+                    </label>
+                </p>
+
+                <p>
+                    <label>
+                        <input
+                            type="radio"
+                            name="metodoPago"
+                            value="Tarjeta"
+                        >
+                        Tarjeta
+                    </label>
+                </p>
+
+                <p>
+                    <label>
+                        <input
+                            type="radio"
+                            name="metodoPago"
+                            value="Transferencia"
+                        >
+                        Transferencia
+                    </label>
+                </p>
+            </fieldset>
+
+            <p>
+                <strong>Total a cobrar:</strong>
+                <span id="totalVenta">$0.00</span>
+            </p>
+
+            <button type="submit">
+                Confirmar venta
+            </button>
+
+        </form>
+
+    </section>
+
+    <hr>
+
+    <section id="ticket">
+
+        <h2>Ticket generado</h2>
+
+        <pre id="ticketContenido">No hay ningún ticket generado.</pre>
+
+        <button type="button" id="imprimirTicket">
+            Imprimir ticket
+        </button>
+
+    </section>
+
+    <hr>
+
+    <section id="operaciones">
+
+        <h2>Panel de operaciones</h2>
+
+        <p>
+            Registro de acciones realizadas durante la sesión.
+        </p>
+
+        <button type="button" id="limpiarLog">
+            Limpiar log
+        </button>
+
+        <button type="button" id="reiniciarSistema">
+            Reiniciar sesión
+        </button>
+
+        <ol id="logOperaciones"></ol>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>Sistema de atención directa al cliente</p>
+</footer>
+
+<script src="../js/tienda-online.js"></script>
+
+</body>
+</html>
