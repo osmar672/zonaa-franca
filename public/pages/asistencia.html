@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Registro de Asistencia y Puntualidad</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Control de Asistencia y Puntualidad</h1>
+
+  <!-- 1. Configurar registro diario y definir métodos permitidos -->
+  <section>
+    <h2>1. Configuración de Registro y Métodos Permitidos</h2>
+    
+    <div>
+      <label for="shiftStartTime">Hora Oficial de Entrada (Zona Franca):</label>
+      <input type="time" id="shiftStartTime" value="08:00">
+    </div>
+
+    <div>
+      <label for="toleranceMinutes">Tolerancia de Puntualidad (Minutos):</label>
+      <input type="number" id="toleranceMinutes" value="10">
+    </div>
+
+    <fieldset>
+      <legend>Métodos de Marcación Permitidos:</legend>
+      <label><input type="checkbox" id="allowBIOMETRICO" checked> Biométrico (Huella/Rostro)</label><br>
+      <label><input type="checkbox" id="allowPIN" checked> PIN Personal</label><br>
+      <label><input type="checkbox" id="allowQR" checked> Código QR Dinámico</label><br>
+      <label><input type="checkbox" id="allowAPP" checked> App Móvil (Geolocalizada ZF)</label>
+    </fieldset>
+
+    <button onclick="saveConfiguration()">Guardar Configuración</button>
+  </section>
+
+  <hr>
+
+  <!-- 2. Validar el funcionamiento de cada método de marcación -->
+  <section>
+    <h2>2. Captura y Validación de Marcas Digitales</h2>
+
+    <div>
+      <label for="empId">ID de Empleado:</label>
+      <input type="text" id="empId" value="ATZ-4021">
+    </div>
+
+    <div>
+      <label for="empName">Nombre del Empleado:</label>
+      <input type="text" id="empName" value="Carlos Mendoza">
+    </div>
+
+    <div>
+      <label for="markTime">Hora de Marcación:</label>
+      <input type="time" id="markTime" value="08:05">
+    </div>
+
+    <div>
+      <label for="methodSelect">Método Utilizado:</label>
+      <select id="methodSelect">
+        <option value="BIOMETRICO">Biométrico</option>
+        <option value="PIN">PIN Personal</option>
+        <option value="QR">Código QR</option>
+        <option value="APP">App Móvil</option>
+      </select>
+    </div>
+
+    <!-- Pruebas de funcionamiento individual por método -->
+    <div>
+      <p>Pruebas individuales de validación de hardware/software:</p>
+      <button onclick="validateMethod('BIOMETRICO')">Validar Biométrico</button>
+      <button onclick="validateMethod('PIN')">Validar PIN</button>
+      <button onclick="validateMethod('QR')">Validar QR</button>
+      <button onclick="validateMethod('APP')">Validar App</button>
+    </div>
+
+    <br>
+    <button onclick="registerAttendanceMark()">Registrar Marca Digital</button>
+  </section>
+
+  <hr>
+
+  <!-- 3. Revisar registro de marcas digitales y verificar consistencia -->
+  <section>
+    <h2>3. Registro de Marcas y Consistencia</h2>
+    <button onclick="reviewDigitalMarks()">Revisar Marcas Registradas</button>
+    <button onclick="verifyConsistency()">Verificar Consistencia y Puntualidad</button>
+
+    <h3>Consola de Marcas Registradas:</h3>
+    <ul id="marksList">
+      <li>No hay marcas registradas.</li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- 4. Generar reportes diarios de asistencia -->
+  <section>
+    <h2>4. Reporte Diario de Asistencia</h2>
+    <button onclick="generateDailyReport()">Generar Reporte Diario</button>
+    
+    <pre id="reportContainer">El reporte diario no se ha generado.</pre>
+  </section>
+
+  <hr>
+
+  <!-- Log de Auditoría / Consola -->
+  <section>
+    <h2>Registro de Auditoría y Salida</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/asistencia.js"></script>
+</body>
+</html>
