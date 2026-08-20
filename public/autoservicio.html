@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoservicio de Nómina</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Autoservicio de Nómina para Empleados</h1>
+        <p>Consulta y descarga de recibos de nómina y comprobantes de salario.</p>
+
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#documentos">Mis documentos</a></li>
+                <li><a href="#ayuda">Ayuda</a></li>
+                <li><button type="button" id="btnCerrarSesion">Cerrar sesión</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- AUTENTICACIÓN -->
+        <section id="inicio">
+            <h2>Acceso seguro</h2>
+
+            <form id="formLogin">
+                <fieldset>
+                    <legend>Autenticación del empleado</legend>
+
+                    <p>
+                        <label for="empleadoId">ID de empleado:</label>
+                        <input
+                            type="text"
+                            id="empleadoId"
+                            name="empleadoId"
+                            required
+                            autocomplete="username"
+                        >
+                    </p>
+
+                    <p>
+                        <label for="password">Contraseña o token:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            autocomplete="current-password"
+                        >
+                    </p>
+
+                    <p>
+                        <label>
+                            <input type="checkbox" id="mostrarPassword">
+                            Mostrar contraseña
+                        </label>
+                    </p>
+
+                    <p>
+                        <label>
+                            <input type="checkbox" id="recordarSesion">
+                            Recordar sesión
+                        </label>
+                    </p>
+
+                    <button type="submit">Ingresar</button>
+
+                    <p id="mensajeLogin" role="alert"></p>
+                </fieldset>
+            </form>
+
+            <article>
+                <h3>Credenciales de demostración</h3>
+                <p>ID: EMP001</p>
+                <p>Contraseña: 123456</p>
+            </article>
+        </section>
+
+        <!-- ÁREA PROTEGIDA -->
+        <section id="areaProtegida" hidden>
+
+            <header>
+                <h2>Panel de Autoservicio</h2>
+                <p id="datosEmpleado"></p>
+            </header>
+
+            <!-- FILTROS -->
+            <section id="documentos">
+                <h2>Consulta de documentos</h2>
+
+                <form id="formFiltros">
+
+                    <fieldset>
+                        <legend>Filtros de búsqueda</legend>
+
+                        <p>
+                            <label for="filtroAnio">Año:</label>
+                            <select id="filtroAnio">
+                                <option value="">Todos</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            <label for="filtroMes">Mes:</label>
+                            <select id="filtroMes">
+                                <option value="">Todos</option>
+                                <option value="01">Enero</option>
+                                <option value="02">Febrero</option>
+                                <option value="03">Marzo</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Mayo</option>
+                                <option value="06">Junio</option>
+                                <option value="07">Julio</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </p>
+
+                        <p>
+                            <label for="filtroTipo">Tipo de documento:</label>
+                            <select id="filtroTipo">
+                                <option value="">Todos</option>
+                                <option value="recibo">Recibo de Nómina</option>
+                                <option value="salario">Comprobante de Salario</option>
+                            </select>
+                        </p>
+
+                        <button type="submit">Buscar documentos</button>
+                        <button type="button" id="btnLimpiarFiltros">
+                            Limpiar filtros
+                        </button>
+                    </fieldset>
+
+                </form>
+
+                <!-- RESULTADOS -->
+                <section>
+                    <h3>Documentos encontrados</h3>
+
+                    <p id="contadorDocumentos"></p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Año</th>
+                                <th>Mes</th>
+                                <th>Tipo</th>
+                                <th>Fecha</th>
+                                <th>Formato</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tablaDocumentos">
+                        </tbody>
+                    </table>
+
+                    <p id="mensajeDocumentos" role="status"></p>
+                </section>
+            </section>
+
+            <!-- INFORMACIÓN DEL EMPLEADO -->
+            <section>
+                <h2>Información del empleado</h2>
+
+                <article>
+                    <dl>
+                        <dt>Empleado</dt>
+                        <dd id="empleadoNombre"></dd>
+
+                        <dt>ID</dt>
+                        <dd id="empleadoCodigo"></dd>
+
+                        <dt>Puesto</dt>
+                        <dd id="empleadoPuesto"></dd>
+
+                        <dt>Departamento</dt>
+                        <dd id="empleadoDepartamento"></dd>
+                    </dl>
+                </article>
+            </section>
+
+            <!-- AYUDA -->
+            <section id="ayuda">
+                <h2>Ayuda y documentación</h2>
+
+                <article>
+                    <h3>¿Cómo consultar un recibo?</h3>
+
+                    <ol>
+                        <li>Inicie sesión utilizando su ID de empleado y contraseña.</li>
+                        <li>Seleccione el año que desea consultar.</li>
+                        <li>Seleccione el mes correspondiente.</li>
+                        <li>Seleccione el tipo de documento.</li>
+                        <li>Presione el botón "Buscar documentos".</li>
+                        <li>Revise los resultados mostrados en la tabla.</li>
+                    </ol>
+                </article>
+
+                <article>
+                    <h3>¿Cómo descargar un documento?</h3>
+
+                    <ol>
+                        <li>Realice una búsqueda utilizando los filtros disponibles.</li>
+                        <li>Localice el documento que desea descargar.</li>
+                        <li>Presione el botón "Descargar".</li>
+                        <li>El sistema validará que tenga permisos para acceder al documento.</li>
+                        <li>Si la validación es correcta, se generará el archivo automáticamente.</li>
+                    </ol>
+                </article>
+
+                <article>
+                    <h3>Seguridad</h3>
+                    <p>
+                        Los documentos mostrados pertenecen únicamente al empleado
+                        autenticado. El sistema realiza una validación de permisos
+                        antes de permitir cualquier descarga.
+                    </p>
+                </article>
+            </section>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Autoservicio de Nómina - Sistema de demostración</p>
+        <p>Los documentos generados son simulaciones para fines educativos.</p>
+    </footer>
+
+    <script src="../js/autoservivio.js"></script>
+
+</body>
+</html>
