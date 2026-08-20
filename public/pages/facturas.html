@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Facturación Electrónica Fiscal</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Módulo de Facturación Electrónica</h1>
+
+  <!-- 1. Revisar requisitos fiscales aplicables -->
+  <section>
+    <h2>Requisitos Fiscales Aplicables (Zona Franca)</h2>
+    <button onclick="checkTaxRequirements()">Revisar Requisitos Fiscales</button>
+    <div id="taxRequirementsStatus">Estado: Pendiente de revisión</div>
+  </section>
+
+  <hr>
+
+  <!-- 2. Formulario para emisión de facturas -->
+  <section>
+    <h2>Emisión de Factura Electrónica</h2>
+    <div>
+      <label for="clientName">Empresa / Cliente:</label>
+      <input type="text" id="clientName" value="Logística Global S.A.">
+    </div>
+
+    <div>
+      <label for="taxId">Identificación Fiscal (ID/RUC):</label>
+      <input type="text" id="taxId" value="3-101-554433">
+    </div>
+
+    <div>
+      <label for="exemptCode">Exención Fiscal Zona Franca (Exoneración):</label>
+      <input type="text" id="exemptCode" value="EX-ZF-2026-998">
+    </div>
+
+    <div>
+      <label for="invoiceAmount">Monto Total ($):</label>
+      <input type="number" id="invoiceAmount" value="4500.00">
+    </div>
+
+    <!-- Implementar emisión de facturas electrónicas -->
+    <button onclick="issueInvoice()">Emitir Factura Electrónica</button>
+  </section>
+
+  <hr>
+
+  <!-- 3. Operaciones: Cancelación, Archivados y Validación Normativa -->
+  <section>
+    <h2>Gestión de Facturas (Cancelación, Archivados y Normativa)</h2>
+    <div>
+      <label for="invoiceSelect">Seleccionar Factura:</label>
+      <select id="invoiceSelect">
+        <option value="">No hay facturas emitidas</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="cancelReason">Motivo de Cancelación:</label>
+      <input type="text" id="cancelReason" value="Anulación por nota de crédito / Error en monto">
+    </div>
+
+    <!-- Implementar cancelación de facturas electrónicas -->
+    <button onclick="cancelInvoice()">Cancelar Factura Electrónica</button>
+    
+    <!-- Implementar archivado de facturas electrónicas -->
+    <button onclick="archiveInvoice()">Archivar Factura Electrónica</button>
+    
+    <!-- Validar cumplimiento normativo -->
+    <button onclick="validateCompliance()">Validar Cumplimiento Normativo</button>
+  </section>
+
+  <hr>
+
+  <!-- 4. Probar flujo completo de facturación electrónica -->
+  <section>
+    <h2>Pruebas del Sistema</h2>
+    <button onclick="testFullBillingWorkflow()">Probar Flujo Completo de Facturación</button>
+  </section>
+
+  <hr>
+
+  <!-- Consola de Salida y Registro de Eventos -->
+  <section>
+    <h2>Registro de Eventos y XML Fiscal</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/facturas.js"></script>
+</body>
+</html>
