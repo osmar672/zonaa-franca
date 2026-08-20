@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Sistema de gestión y administración de proveedores de Arenal Trade Zone"
+    >
+
+    <title>Arenal Trade Zone | Gestión de Proveedores</title>
+</head>
+
+<body>
+
+    <!-- Encabezado principal -->
+    <header>
+        <p>ARENAL TRADE ZONE</p>
+
+        <h1>Gestión de Proveedores</h1>
+
+        <p>
+            Directorio centralizado para administrar proveedores,
+            compras, inventario, logística y producción.
+        </p>
+    </header>
+
+
+    <!-- Navegación principal -->
+    <nav aria-label="Navegación principal">
+        <ul>
+            <li>
+                <a href="#proveedores">Proveedores</a>
+            </li>
+
+            <li>
+                <a href="#compras">Compras</a>
+            </li>
+
+            <li>
+                <a href="#inventario">Inventario</a>
+            </li>
+
+            <li>
+                <a href="#logistica">Logística</a>
+            </li>
+
+            <li>
+                <a href="#produccion">Producción</a>
+            </li>
+
+            <li>
+                <a href="#cumplimiento">Cumplimiento</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <main>
+
+        <!-- ==================================================
+             FUNCIONES DEL MÓDULO
+        =================================================== -->
+
+        <section
+            id="funciones"
+            aria-labelledby="titulo-funciones"
+        >
+
+            <header>
+                <h2 id="titulo-funciones">
+                    Funciones de gestión
+                </h2>
+
+                <p>
+                    Operaciones disponibles para la administración
+                    de proveedores.
+                </p>
+            </header>
+
+            <ul>
+
+                <li>
+                    <strong>Registrar proveedores</strong>
+                </li>
+
+                <li>
+                    <strong>Actualizar historial de compras</strong>
+                </li>
+
+                <li>
+                    <strong>Documentar condiciones comerciales</strong>
+                </li>
+
+                <li>
+                    <strong>Mantener contactos de proveedores</strong>
+                </li>
+
+                <li>
+                    <strong>Centralizar información de inventario</strong>
+                </li>
+
+                <li>
+                    <strong>Revisar logística de compras</strong>
+                </li>
+
+                <li>
+                    <strong>Dar seguimiento a producción</strong>
+                </li>
+
+                <li>
+                    <strong>Evaluar cumplimiento de proveedores</strong>
+                </li>
+
+            </ul>
+
+        </section>
+
+
+        <!-- ==================================================
+             DIRECTORIO DE PROVEEDORES
+        =================================================== -->
+
+        <section
+            id="proveedores"
+            aria-labelledby="titulo-proveedores"
+        >
+
+            <header>
+                <h2 id="titulo-proveedores">
+                    Directorio de Proveedores
+                </h2>
+
+                <p>
+                    Consulta y filtra la información registrada
+                    de los proveedores.
+                </p>
+            </header>
+
+
+            <!-- Buscador y filtros -->
+
+            <form id="formFiltros">
+
+                <fieldset>
+
+                    <legend>
+                        Buscar y filtrar proveedores
+                    </legend>
+
+
+                    <div>
+
+                        <label for="buscador">
+                            Buscar proveedor
+                        </label>
+
+                        <input
+                            type="search"
+                            id="buscador"
+                            name="buscador"
+                            placeholder="Nombre, contacto, categoría o correo..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="filtroCategoria">
+                            Categoría
+                        </label>
+
+                        <select
+                            id="filtroCategoria"
+                            name="categoria"
+                        >
+
+                            <option value="">
+                                Todas las categorías
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="filtroEstado">
+                            Estado
+                        </label>
+
+                        <select
+                            id="filtroEstado"
+                            name="estado"
+                        >
+
+                            <option value="">
+                                Todos los estados
+                            </option>
+
+                            <option value="activo">
+                                Activo
+                            </option>
+
+                            <option value="inactivo">
+                                Inactivo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="reset"
+                        id="btnLimpiarFiltros"
+                    >
+                        Limpiar filtros
+                    </button>
+
+                </fieldset>
+
+            </form>
+
+
+            <!-- Resultados -->
+
+            <section
+                id="listaProveedores"
+                aria-label="Resultados de proveedores"
+                aria-live="polite"
+            >
+            </section>
+
+        </section>
+
+
+        <!-- ==================================================
+             REGISTRAR PROVEEDOR
+        =================================================== -->
+
+        <section
+            id="registro"
+            aria-labelledby="titulo-registro"
+        >
+
+            <header>
+                <h2 id="titulo-registro">
+                    Registrar proveedor
+                </h2>
+            </header>
+
+            <form id="formProveedor">
+
+                <fieldset>
+
+                    <legend>
+                        Información del proveedor
+                    </legend>
+
+
+                    <div>
+
+                        <label for="nombreProveedor">
+                            Nombre del proveedor
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nombreProveedor"
+                            name="nombreProveedor"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="categoriaProveedor">
+                            Categoría
+                        </label>
+
+                        <input
+                            type="text"
+                            id="categoriaProveedor"
+                            name="categoriaProveedor"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="contactoProveedor">
+                            Persona de contacto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contactoProveedor"
+                            name="contactoProveedor"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="emailProveedor">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="emailProveedor"
+                            name="emailProveedor"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label for="estadoProveedor">
+                            Estado
+                        </label>
+
+                        <select
+                            id="estadoProveedor"
+                            name="estadoProveedor"
+                            required
+                        >
+
+                            <option value="activo">
+                                Activo
+                            </option>
+
+                            <option value="inactivo">
+                                Inactivo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button type="submit">
+                        Registrar proveedor
+                    </button>
+
+                </fieldset>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==================================================
+             COMPRAS
+        =================================================== -->
+
+        <section
+            id="compras"
+            aria-labelledby="titulo-compras"
+        >
+
+            <h2 id="titulo-compras">
+                Historial de compras
+            </h2>
+
+            <p>
+                Registro y actualización del historial de compras
+                realizadas a los proveedores.
+            </p>
+
+        </section>
+
+
+        <!-- ==================================================
+             CONDICIONES COMERCIALES
+        =================================================== -->
+
+        <section
+            id="condiciones"
+            aria-labelledby="titulo-condiciones"
+        >
+
+            <h2 id="titulo-condiciones">
+                Condiciones comerciales
+            </h2>
+
+            <p>
+                Administración de precios, condiciones de pago,
+                descuentos y acuerdos comerciales.
+            </p>
+
+        </section>
+
+
+        <!-- ==================================================
+             CONTACTOS
+        =================================================== -->
+
+        <section
+            id="contactos"
+            aria-labelledby="titulo-contactos"
+        >
+
+            <h2 id="titulo-contactos">
+                Contactos de proveedores
+            </h2>
+
+            <p>
+                Información centralizada de las personas
+                responsables de cada proveedor.
+            </p>
+
+        </section>
+
+
+        <!-- ==================================================
+             INVENTARIO
+        =================================================== -->
+
+        <section
+            id="inventario"
+            aria-labelledby="titulo-inventario"
+        >
+
+            <h2 id="titulo-inventario">
+                Inventario
+            </h2>
+
+            <p>
+                Control y centralización de la información
+                relacionada con inventario y suministros.
+            </p>
+
+        </section>
+
+
+        <!-- ==================================================
+             LOGÍSTICA
+        =================================================== -->
+
+        <section
+            id="logistica"
+            aria-labelledby="titulo-logistica"
+        >
+
+            <h2 id="titulo-logistica">
+                Logística de compras
+            </h2>
+
+            <p>
+                Seguimiento de pedidos, entregas, tiempos
+                de recepción y operaciones logísticas.
+            </p>
+
+        </section>
+
+
+        <!-- ==================================================
+             PRODUCCIÓN
+        =================================================== -->
+
+        <section
+            id="produccion"
+            aria-labelledby="titulo-produccion"
+        >
+
+            <h2 id="titulo-produccion">
+                Seguimiento de producción
+            </h2>
+
+            <p>
+                Control del avance de producción relacionado
+                con los proveedores y pedidos.
+            </p>
+
+        </section>
+
+
+        <!-- ==================================================
+             CUMPLIMIENTO
+        =================================================== -->
+
+        <section
+            id="cumplimiento"
+            aria-labelledby="titulo-cumplimiento"
+        >
+
+            <h2 id="titulo-cumplimiento">
+                Evaluación de cumplimiento
+            </h2>
+
+            <p>
+                Evaluación del cumplimiento de proveedores,
+                entregas, calidad y condiciones acordadas.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==================================================
+         PIE DE PÁGINA
+    =================================================== -->
+
+    <footer>
+
+        <p>
+            Arenal Trade Zone
+        </p>
+
+        <p>
+            Sistema de Gestión de Proveedores
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script src="../js/provedores.js"></script>
+
+</body>
+</html>
