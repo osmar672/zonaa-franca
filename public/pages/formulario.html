@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Formulario de Reportes Periódicos y Alertas</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Seguimiento de Compromisos de Zona Franca</h1>
+
+  <!-- 1. Formulario de reportes periódicos -->
+  <section>
+    <h2>1. Formulario de Reportes Periódicos (Datos Reales)</h2>
+    
+    <div>
+      <label for="companySelect">Empresa Instalada:</label>
+      <select id="companySelect" onchange="loadApprovedTargets()">
+        <option value="TECH_PARK">TechPark Solutions S.A.</option>
+        <option value="GLOBAL_LOGISTICS">Global Logistics Corp</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="periodSelect">Período a Reportar:</label>
+      <select id="periodSelect">
+        <option value="2026-Q1">2026 - Trimestre 1</option>
+        <option value="2026-Q2" selected>2026 - Trimestre 2</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="dueDate">Fecha Límite de Envío:</label>
+      <input type="date" id="dueDate" value="2026-07-15">
+    </div>
+
+    <div>
+      <label for="submissionDate">Fecha de Envío Real:</label>
+      <input type="date" id="submissionDate" value="2026-08-01">
+    </div>
+
+    <h3>Metas Aprobadas vs. Cifras Reales</h3>
+
+    <div>
+      <label for="realJobs">Empleos Generados (Reales):</label>
+      <input type="number" id="realJobs" value="85">
+      <small>(Meta Aprobada: <span id="targetJobs">100</span>)</small>
+    </div>
+
+    <div>
+      <label for="realInvestment">Inversión Ejecutada ($):</label>
+      <input type="number" id="realInvestment" value="450000">
+      <small>(Meta Aprobada: $<span id="targetInvestment">500000</span>)</small>
+    </div>
+
+    <div>
+      <label for="realExports">Volumen Exportado ($):</label>
+      <input type="number" id="realExports" value="1200000">
+      <small>(Meta Aprobada: $<span id="targetExports">1000000</span>)</small>
+    </div>
+
+    <!-- Comparación de metas y generación de alertas -->
+    <button onclick="submitReportAndEvaluate()">Enviar Reporte y Evaluar Metas</button>
+  </section>
+
+  <hr>
+
+  <!-- 2. Programar el sistema de alertas -->
+  <section>
+    <h2>2. Alertas Generadas por Incumplimiento o Atraso</h2>
+    <div id="alertsContainer">
+      <p>No hay alertas activas generadas.</p>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 3. Asignación a analista y nota de atención -->
+  <section>
+    <h2>3. Gestión de Alerta (Asignación y Cierre)</h2>
+
+    <div>
+      <label for="alertSelect">Seleccionar Alerta Activa:</label>
+      <select id="alertSelect">
+        <option value="">No hay alertas para gestionar</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="analystName">Analista Responsable:</label>
+      <input type="text" id="analystName" value="Licda. Mariela Castro">
+    </div>
+
+    <div>
+      <label for="resolutionNote">Nota de Atención / Seguimiento:</label>
+      <textarea id="resolutionNote" rows="3" cols="50">Se solicitó un plan de readecuación a la empresa para subsanar los empleos en el próximo trimestre.</textarea>
+    </div>
+
+    <div>
+      <label for="closingDate">Fecha de Cierre:</label>
+      <input type="date" id="closingDate" value="2026-08-20">
+    </div>
+
+    <button onclick="assignAndCloseAlert()">Asignar y Cerrar Alerta</button>
+  </section>
+
+  <hr>
+
+  <!-- Registro de Eventos -->
+  <section>
+    <h2>Consola de Registro de Actividad</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/formulario.js"></script>
+</body>
+</html>
