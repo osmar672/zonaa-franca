@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analyst Detailed Evaluation View - ZoFranca CR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "slate-text": "#1E293B",
+                      "on-tertiary-fixed-variant": "#5c4300",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#6ddd88",
+                      "navy-deep": "#0A2463",
+                      "border-subtle": "#E2E8F0",
+                      "outline": "#757681",
+                      "surface-variant": "#e1e3e4",
+                      "primary-fixed-dim": "#b5c4ff",
+                      "primary-container": "#0a2463",
+                      "on-primary-container": "#7a8ed2",
+                      "secondary-fixed": "#8afaa2",
+                      "on-secondary-fixed-variant": "#005224",
+                      "primary-fixed": "#dce1ff",
+                      "error-container": "#ffdad6",
+                      "background": "#f8f9fa",
+                      "on-background": "#191c1d",
+                      "tertiary-fixed": "#ffdea0",
+                      "primary": "#00103e",
+                      "on-secondary-container": "#007234",
+                      "on-tertiary-container": "#b88900",
+                      "on-error": "#ffffff",
+                      "surface-tint": "#475b9c",
+                      "inverse-primary": "#b5c4ff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed": "#00164d",
+                      "surface-bright": "#f8f9fa",
+                      "tertiary": "#1e1300",
+                      "on-primary-fixed-variant": "#2e4382",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#e7e8e9",
+                      "tertiary-container": "#372700",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed-dim": "#fbbc06",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-dim": "#d9dadb",
+                      "secondary": "#006d32",
+                      "on-surface-variant": "#444650",
+                      "on-surface": "#191c1d",
+                      "surface-container": "#edeeef",
+                      "inverse-on-surface": "#f0f1f2",
+                      "outline-variant": "#c5c6d2",
+                      "surface": "#f8f9fa",
+                      "on-secondary-fixed": "#00210a",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-container-lowest": "#ffffff",
+                      "emerald-growth": "#058C42",
+                      "on-tertiary-fixed": "#261a00",
+                      "secondary-container": "#87f79f",
+                      "status-alert": "#D90429",
+                      "inverse-surface": "#2e3132"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "8px",
+                      "container-max": "1280px",
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "mono-data": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "mono-data": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md text-body-md h-screen flex overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface dark:bg-inverse-surface fixed h-full left-0 w-64 border-r border-border-subtle dark:border-outline-variant flex flex-col p-base gap-2 z-40 hidden md:flex">
+<!-- Header -->
+<div class="flex items-center gap-4 px-4 py-6 mb-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A clean, modern corporate logo for ZoFranca CR featuring abstract geometric shapes in deep navy blue on a crisp white background, suitable for a high-level government or financial institution portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwblChL2SrtIvzXPEnF1mEn0ZZMOtl0jFlZgw14-dY_32Qvi-nzsmbBsAkVkpxY3P93XNckeceFzQQO1Im8eiaUrvrKCS2iRTkrPy3n7C8zsJ6agAQXswWtQMroMns_c4O4HMGBUEHcxRs1965UgYRh4DjA7BNM29MZWkKtb3D6DIuzV3JL1AaGvWTcyD0FP_ip6DmpC_G7Ny6NFrD4QOdoHH0iU3vb52yyqtGE9O9RvcDjcK7JS2M3w"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-black text-navy-deep dark:text-primary-fixed leading-tight tracking-tight">ZoFranca CR</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">FTZ Management System</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-navy-deep transition-colors" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm group-hover:text-navy-deep transition-colors">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container dark:bg-primary-fixed-dim dark:text-on-primary-fixed rounded-lg font-bold transition-all active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="how_to_reg" style="font-variation-settings: 'FILL' 1;">how_to_reg</span>
+<span class="font-label-sm text-label-sm">Registration</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-navy-deep transition-colors" data-icon="fact_check">fact_check</span>
+<span class="font-label-sm text-label-sm group-hover:text-navy-deep transition-colors">Compliance Logs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-navy-deep transition-colors" data-icon="psychology">psychology</span>
+<span class="font-label-sm text-label-sm group-hover:text-navy-deep transition-colors">AI Evaluation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-navy-deep transition-colors" data-icon="description">description</span>
+<span class="font-label-sm text-label-sm group-hover:text-navy-deep transition-colors">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined group-hover:text-navy-deep transition-colors" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm group-hover:text-navy-deep transition-colors">History</span>
+</a>
+</div>
+<!-- Footer Actions -->
+<div class="mt-auto pt-4 border-t border-border-subtle flex flex-col gap-1">
+<button class="w-full text-left flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group">
+<span class="material-symbols-outlined group-hover:text-navy-deep" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm group-hover:text-navy-deep">Settings</span>
+</button>
+<button class="w-full text-left flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group">
+<span class="material-symbols-outlined group-hover:text-status-alert" data-icon="logout">logout</span>
+<span class="font-label-sm text-label-sm group-hover:text-status-alert">Logout</span>
+</button>
+<button class="mt-2 w-full bg-surface-container border border-border-subtle text-navy-deep font-label-sm text-label-sm py-2 rounded-lg hover:bg-surface-container-high transition-colors">
+                Support Center
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col md:ml-64 bg-background overflow-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim border-b border-border-subtle dark:border-outline-variant flex justify-between items-center w-full px-margin-desktop h-16 sticky top-0 z-30">
+<!-- Mobile Menu & Breadcrumb -->
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:bg-surface-container p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="flex items-center gap-2 font-label-sm text-label-sm">
+<span class="text-on-surface-variant">Requests</span>
+<span class="material-symbols-outlined text-[16px] text-outline-variant">chevron_right</span>
+<span class="text-navy-deep font-bold">REQ-2023-8904</span>
+</div>
+</div>
+<!-- Top Nav Links (Hidden on Mobile) -->
+<div class="hidden md:flex items-end h-full gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:opacity-80 pb-4 h-full flex items-end" href="#">
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="text-navy-deep dark:text-primary-fixed border-b-2 border-navy-deep pb-4 h-full flex items-end font-bold hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:opacity-80" href="#">
+<span class="font-label-sm text-label-sm">Requests</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:opacity-80 pb-4 h-full flex items-end" href="#">
+<span class="font-label-sm text-label-sm">Compliance</span>
+</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-high transition-colors active:opacity-80 pb-4 h-full flex items-end" href="#">
+<span class="font-label-sm text-label-sm">Audit</span>
+</a>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<!-- Audit Mode Toggle -->
+<div class="hidden sm:flex items-center gap-2 mr-4 bg-surface-container-high px-3 py-1.5 rounded-full border border-border-subtle">
+<span class="font-label-sm text-label-sm text-slate-text">Audit Mode</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-navy-deep"></div>
+</label>
+</div>
+<button class="hidden md:block bg-navy-deep text-on-primary font-label-sm text-label-sm px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                     New Request
+                 </button>
+<div class="flex items-center gap-1">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-status-alert rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors hidden sm:block">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors hidden sm:block">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A professional headshot of a female financial analyst in a modern office setting, bright lighting, crisp focus, wearing a dark blazer." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUByNhU16rxMJH2D0ookrqzcLQQ_kDp5ramWVqRkpdopPHtt_YcdJetq3N3ABXcwvhMRebA4K5U1oSqUTlutwndBBvFjmkDeyDU_5aAq73V8fHizVmFDbG0oNBU9-24G9rVzDMgKQ0SR6JKdUJzqMR8kd0wTuTu-gINGBM2FqQZc4MsKXTgLuiMvH5rVm163r0yFrDaflPqYbajdBXr2k5bitN8mst9lXcQJOMBY3bf59oO4DFre_OYQ"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-gutter">
+<div class="max-w-container-max mx-auto space-y-gutter pb-24">
+<!-- Page Header Area -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-secondary-container text-on-secondary-fixed-variant px-2.5 py-0.5 rounded-full font-label-sm text-[12px] uppercase tracking-wider font-bold">Pending Review</span>
+<span class="text-on-surface-variant font-mono-data text-mono-data">Submitted: Oct 12, 2023</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-slate-text mb-1">Installation Request Evaluation</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Review entity details, AI pre-classification, and supporting documentation.</p>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: Company Details & Docs (8 cols) -->
+<div class="xl:col-span-8 flex flex-col gap-gutter">
+<!-- Company Profile Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 relative overflow-hidden">
+<!-- Subtle abstract bg accent -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary-fixed-dim/20 to-transparent rounded-bl-full -z-0 pointer-events-none"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 bg-surface-container border border-border-subtle rounded-lg flex items-center justify-center p-2">
+<span class="material-symbols-outlined text-4xl text-navy-deep" data-icon="factory">factory</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-slate-text">Nexus Global Logistics Ltda.</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tax ID: 3-101-555234 • Registered in San José</p>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<!-- Data Metric -->
+<div class="border-l-2 border-primary-fixed-dim pl-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Projected Investment</p>
+<p class="font-headline-md text-headline-md text-navy-deep font-bold">$12.5M <span class="text-body-md font-normal text-on-surface-variant">USD</span></p>
+</div>
+<!-- Data Metric -->
+<div class="border-l-2 border-emerald-growth/30 pl-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Projected Jobs</p>
+<p class="font-headline-md text-headline-md text-slate-text font-bold">250 <span class="text-body-md font-normal text-on-surface-variant">FTEs</span></p>
+</div>
+<!-- Data Metric -->
+<div class="border-l-2 border-tertiary-fixed-dim/50 pl-4">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Target Sector</p>
+<p class="font-body-lg text-body-lg text-slate-text font-medium">Advanced Manufacturing</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Gallery -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6">
+<h4 class="font-headline-md text-headline-md text-slate-text mb-4">Supporting Documentation</h4>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Doc Item 1 -->
+<a class="flex items-start gap-4 p-4 rounded-lg border border-border-subtle hover:border-navy-deep hover:bg-surface-container-low transition-all group" href="#">
+<div class="bg-error-container text-on-error-container p-2 rounded-lg shrink-0">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-sm text-label-sm text-slate-text font-bold truncate group-hover:text-navy-deep">Legal_Constitution_Nexus.pdf</p>
+<p class="font-mono-data text-mono-data text-on-surface-variant mt-1">2.4 MB • Uploaded Oct 12</p>
+<div class="mt-2 flex items-center gap-1 text-emerald-growth">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-[12px]">Verified</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-navy-deep" data-icon="download">download</span>
+</a>
+<!-- Doc Item 2 -->
+<a class="flex items-start gap-4 p-4 rounded-lg border border-border-subtle hover:border-navy-deep hover:bg-surface-container-low transition-all group" href="#">
+<div class="bg-error-container text-on-error-container p-2 rounded-lg shrink-0">
+<span class="material-symbols-outlined" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-label-sm text-label-sm text-slate-text font-bold truncate group-hover:text-navy-deep">Fiscal_Projections_2024.pdf</p>
+<p class="font-mono-data text-mono-data text-on-surface-variant mt-1">5.1 MB • Uploaded Oct 12</p>
+<div class="mt-2 flex items-center gap-1 text-emerald-growth">
+<span class="material-symbols-outlined text-[16px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-[12px]">Verified</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-navy-deep" data-icon="download">download</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Score & Decision (4 cols) -->
+<div class="xl:col-span-4 flex flex-col gap-gutter">
+<!-- AI Pre-classification Panel -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-6 shadow-sm relative overflow-hidden flex flex-col h-full">
+<div class="flex items-center justify-between mb-6 relative z-10">
+<h4 class="font-headline-md text-headline-md text-slate-text flex items-center gap-2">
+<span class="material-symbols-outlined text-navy-deep" data-icon="psychology">psychology</span>
+                                    AI Pre-classification
+                                </h4>
+<span class="bg-surface-container-high text-on-surface-variant text-[11px] font-bold uppercase px-2 py-1 rounded">Beta</span>
+</div>
+<!-- Radial Score Visual (Simulated with CSS) -->
+<div class="flex flex-col items-center justify-center py-6 mb-4">
+<div class="relative w-32 h-32 flex items-center justify-center rounded-full bg-surface-container">
+<!-- Pseudo SVG ring for the score -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-variant" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-emerald-growth" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="283" stroke-dashoffset="42" stroke-width="8"></circle> <!-- 85% of 283 -->
+</svg>
+<div class="text-center relative z-10">
+<span class="font-display-lg text-[40px] leading-none text-slate-text font-black block">85</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">/100</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 bg-secondary-container/30 px-3 py-1 rounded-full border border-secondary-container">
+<span class="material-symbols-outlined text-emerald-growth text-[18px]" data-icon="verified">verified</span>
+<span class="font-label-sm text-label-sm text-emerald-growth font-bold">Recommended</span>
+</div>
+</div>
+<!-- AI Reasoning -->
+<div class="bg-surface-container-low rounded-lg p-4 flex-1">
+<h5 class="font-label-sm text-label-sm text-slate-text mb-3 uppercase tracking-wider flex justify-between items-center">
+                                    Reasoning Engine
+                                    <button class="text-navy-deep hover:underline text-[12px] normal-case tracking-normal">View Full Log</button>
+</h5>
+<ul class="space-y-3 font-body-md text-[14px] text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-emerald-growth text-[18px] shrink-0 mt-0.5" data-icon="check">check</span>
+<span>Investment of $12.5M exceeds the required category threshold by 25%.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-emerald-growth text-[18px] shrink-0 mt-0.5" data-icon="check">check</span>
+<span>'Advanced Manufacturing' sector aligns strictly with strategic zone criteria.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-[18px] shrink-0 mt-0.5" data-icon="warning">warning</span>
+<span>Historical compliance flag (2021) detected on principal stakeholder; resolved in 2022.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Human Decision Section (Full Width Bottom) -->
+<div class="bg-surface-container-lowest border-t-4 border-navy-deep rounded-xl p-6 shadow-sm">
+<h4 class="font-headline-md text-headline-md text-slate-text mb-2">Final Analyst Decision</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Record your determination. This action is irreversible and requires mandatory justification for audit trail (RF-20).</p>
+<form class="space-y-6 max-w-3xl">
+<!-- Mandatory Comment Field -->
+<div>
+<label class="block font-label-sm text-label-sm text-slate-text mb-2" for="decision-reason">
+                                Reason for Decision <span class="text-status-alert">*</span>
+</label>
+<textarea class="w-full rounded-lg border-outline-variant bg-surface focus:border-navy-deep focus:ring-navy-deep font-body-md text-slate-text placeholder:text-outline-variant transition-colors" id="decision-reason" placeholder="Detail your rationale based on the provided documentation and AI assessment..." required="" rows="4"></textarea>
+<p class="mt-2 font-mono-data text-mono-data text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="info">info</span>
+                                Minimum 50 characters required for compliance log.
+                            </p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap gap-4 pt-4 border-t border-border-subtle">
+<button class="bg-navy-deep text-on-primary font-label-sm text-label-sm px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm" type="button">
+<span class="material-symbols-outlined" data-icon="thumb_up">thumb_up</span>
+                                Approve Request
+                            </button>
+<button class="bg-surface border-2 border-emerald-growth text-emerald-growth font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-emerald-growth hover:text-white transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+                                Send to Review
+                            </button>
+<div class="flex-1"></div> <!-- Spacer -->
+<button class="text-status-alert font-label-sm text-label-sm px-6 py-3 rounded-lg hover:bg-error-container transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined" data-icon="block">block</span>
+                                Reject Request
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+</body></html>
