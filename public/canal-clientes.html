@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de gestión B2B para ventas corporativas y distribuidores">
+    <title>Canal de Ventas B2B</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Canal de Ventas B2B</h1>
+    <p>Gestión corporativa y distribuidores</p>
+
+    <nav aria-label="Navegación principal">
+        <ul>
+            <li><a href="#cotizacion">Cotización</a></li>
+            <li><a href="#credito">Evaluación crediticia</a></li>
+            <li><a href="#kpi">Indicadores KPI</a></li>
+            <li><a href="#documentacion">Documentación normativa</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <!-- =========================================================
+         SECCIÓN DE COTIZACIÓN
+         ========================================================= -->
+    <section id="cotizacion">
+        <header>
+            <h2>Generador de cotizaciones B2B</h2>
+            <p>Configure una cotización personalizada para clientes corporativos.</p>
+        </header>
+
+        <form id="quoteForm">
+
+            <fieldset>
+                <legend>Información del cliente</legend>
+
+                <p>
+                    <label for="razonSocial">Razón Social:</label>
+                    <input
+                        type="text"
+                        id="razonSocial"
+                        name="razonSocial"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="rucNit">RUC/NIT:</label>
+                    <input
+                        type="text"
+                        id="rucNit"
+                        name="rucNit"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="tipoDistribuidor">Tipo de Distribuidor:</label>
+                    <select id="tipoDistribuidor" name="tipoDistribuidor" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Corporativo">Corporativo</option>
+                        <option value="Mayorista">Mayorista</option>
+                        <option value="Distribuidor">Distribuidor</option>
+                        <option value="Revendedor">Revendedor</option>
+                        <option value="Institucional">Institucional</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="clienteCredito">Cliente para evaluación crediticia:</label>
+                    <select id="clienteCredito" name="clienteCredito">
+                        <option value="">Seleccione un cliente registrado...</option>
+                    </select>
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Ítems solicitados</legend>
+
+                <table>
+                    <caption>Productos y precios escalonados por volumen</caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio base</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Precio unitario</th>
+                            <th scope="col">Subtotal</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productsBody">
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <th colspan="5" scope="row">Subtotal general</th>
+                            <td id="subtotalGeneral">0.00</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="5" scope="row">Descuento por volumen</th>
+                            <td id="descuentoGeneral">0.00</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="5" scope="row">Subtotal después de descuentos</th>
+                            <td id="subtotalNeto">0.00</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="5" scope="row">Impuestos</th>
+                            <td id="impuestos">0.00</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="5" scope="row">Total definitivo</th>
+                            <td id="totalDefinitivo">0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <legend>Términos comerciales</legend>
+
+                <p>
+                    <label for="terminosComerciales">
+                        Términos comerciales especiales:
+                    </label>
+                </p>
+
+                <p>
+                    <textarea
+                        id="terminosComerciales"
+                        name="terminosComerciales"
+                        rows="6"
+                        cols="70"
+                        placeholder="Ingrese condiciones especiales, fechas de entrega, descuentos adicionales, acuerdos comerciales, etc."
+                    ></textarea>
+                </p>
+            </fieldset>
+
+            <p>
+                <button type="submit">Generar cotización</button>
+                <button type="reset" id="resetQuote">Limpiar formulario</button>
+            </p>
+        </form>
+
+        <article id="quoteResult" hidden>
+            <header>
+                <h3>Resumen de cotización</h3>
+            </header>
+
+            <dl>
+                <dt>ID de cotización</dt>
+                <dd id="quoteId"></dd>
+
+                <dt>Fecha de emisión</dt>
+                <dd id="quoteDate"></dd>
+
+                <dt>Razón Social</dt>
+                <dd id="resultRazonSocial"></dd>
+
+                <dt>RUC/NIT</dt>
+                <dd id="resultRucNit"></dd>
+
+                <dt>Tipo de distribuidor</dt>
+                <dd id="resultTipoDistribuidor"></dd>
+            </dl>
+
+            <h4>Desglose de productos</h4>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio base</th>
+                        <th>Descuento</th>
+                        <th>Precio final</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody id="quoteItemsResult">
+                </tbody>
+            </table>
+
+            <h4>Resumen financiero</h4>
+
+            <dl>
+                <dt>Subtotal bruto</dt>
+                <dd id="resultSubtotal"></dd>
+
+                <dt>Descuento total</dt>
+                <dd id="resultDescuento"></dd>
+
+                <dt>Subtotal neto</dt>
+                <dd id="resultNeto"></dd>
+
+                <dt>Impuestos</dt>
+                <dd id="resultImpuestos"></dd>
+
+                <dt>Total definitivo</dt>
+                <dd id="resultTotal"></dd>
+            </dl>
+
+            <h4>Términos comerciales</h4>
+            <p id="resultTerminos"></p>
+        </article>
+    </section>
+
+    <hr>
+
+    <!-- =========================================================
+         SECCIÓN DE CRÉDITO
+         ========================================================= -->
+    <section id="credito">
+        <header>
+            <h2>Evaluación de riesgo crediticio</h2>
+            <p>Validación previa de la capacidad de crédito del cliente.</p>
+        </header>
+
+        <article>
+            <h3>Resultado de evaluación</h3>
+
+            <dl>
+                <dt>Cliente</dt>
+                <dd id="creditClient">Sin evaluar</dd>
+
+                <dt>Línea de crédito aprobada</dt>
+                <dd id="creditLimit">0.00</dd>
+
+                <dt>Saldo utilizado</dt>
+                <dd id="creditUsed">0.00</dd>
+
+                <dt>Crédito disponible</dt>
+                <dd id="creditAvailable">0.00</dd>
+
+                <dt>Monto de cotización</dt>
+                <dd id="creditQuoteAmount">0.00</dd>
+
+                <dt>Dictamen</dt>
+                <dd id="creditDecision">Pendiente</dd>
+            </dl>
+
+            <p id="creditMessage"></p>
+        </article>
+    </section>
+
+    <hr>
+
+    <!-- =========================================================
+         DASHBOARD KPI
+         ========================================================= -->
+    <section id="kpi">
+        <header>
+            <h2>Dashboard operativo B2B</h2>
+            <p>Seguimiento del avance de implementación del canal corporativo.</p>
+        </header>
+
+        <article>
+            <h3>Progreso global</h3>
+
+            <p>
+                <strong id="progressPercentage">0%</strong>
+            </p>
+
+            <progress
+                id="progressBar"
+                value="0"
+                max="100"
+            >
+                0%
+            </progress>
+        </article>
+
+        <fieldset id="checklistContainer">
+            <legend>Checklist de implementación</legend>
+        </fieldset>
+    </section>
+
+    <hr>
+
+    <!-- =========================================================
+         DOCUMENTACIÓN NORMATIVA
+         ========================================================= -->
+    <section id="documentacion">
+
+        <header>
+            <h2>Documentación normativa corporativa</h2>
+            <p>
+                Políticas y procedimientos aplicables al canal de ventas B2B.
+            </p>
+        </header>
+
+        <article>
+            <header>
+                <h3>1. Acuerdos de nivel de servicio — SLA</h3>
+            </header>
+
+            <p>
+                El canal corporativo deberá proporcionar tiempos de atención
+                diferenciados según el nivel de prioridad y criticidad de la
+                solicitud comercial.
+            </p>
+
+            <table>
+                <caption>Niveles de servicio</caption>
+
+                <thead>
+                    <tr>
+                        <th>Nivel</th>
+                        <th>Tipo de solicitud</th>
+                        <th>Tiempo máximo de respuesta</th>
+                        <th>Tiempo objetivo de resolución</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Crítico</td>
+                        <td>Incidencia que afecta una operación corporativa</td>
+                        <td>1 hora</td>
+                        <td>4 horas</td>
+                    </tr>
+
+                    <tr>
+                        <td>Alto</td>
+                        <td>Solicitud comercial prioritaria</td>
+                        <td>4 horas</td>
+                        <td>1 día hábil</td>
+                    </tr>
+
+                    <tr>
+                        <td>Normal</td>
+                        <td>Cotizaciones y consultas generales</td>
+                        <td>1 día hábil</td>
+                        <td>3 días hábiles</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+        <article>
+            <header>
+                <h3>2. Política de facturación corporativa</h3>
+            </header>
+
+            <p>
+                Las operaciones B2B deberán generar documentación comercial
+                asociada a la razón social y al identificador fiscal registrado.
+            </p>
+
+            <p>
+                La factura deberá reflejar correctamente cantidades, precios,
+                descuentos por volumen, impuestos, condiciones de pago y
+                referencias de la orden de compra cuando sean requeridas.
+            </p>
+        </article>
+
+        <article>
+            <header>
+                <h3>3. Términos de pago diferido</h3>
+            </header>
+
+            <dl>
+                <dt>Net 30</dt>
+                <dd>
+                    El cliente dispone de 30 días calendario desde la fecha
+                    establecida para la factura para efectuar el pago.
+                </dd>
+
+                <dt>Net 60</dt>
+                <dd>
+                    El cliente dispone de 60 días calendario para realizar
+                    el pago correspondiente.
+                </dd>
+
+                <dt>Net 90</dt>
+                <dd>
+                    El cliente dispone de 90 días calendario para completar
+                    el pago, sujeto a aprobación crediticia.
+                </dd>
+            </dl>
+
+            <p>
+                Los términos diferidos requieren una línea de crédito vigente,
+                documentación contractual y aprobación conforme a las
+                políticas internas de riesgo.
+            </p>
+        </article>
+
+        <article>
+            <header>
+                <h3>4. Procedimiento de garantía mayorista</h3>
+            </header>
+
+            <ol>
+                <li>Registrar formalmente la solicitud de garantía.</li>
+                <li>Verificar factura, número de pedido y fecha de adquisición.</li>
+                <li>Validar que el producto se encuentre dentro del período de garantía.</li>
+                <li>Documentar la incidencia reportada por el cliente.</li>
+                <li>Realizar evaluación técnica cuando corresponda.</li>
+                <li>Determinar reparación, reemplazo, nota de crédito o rechazo.</li>
+                <li>Registrar el resultado y cerrar el caso.</li>
+            </ol>
+        </article>
+
+        <article>
+            <header>
+                <h3>5. Matriz de términos corporativos</h3>
+            </header>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Política</th>
+                        <th>Control requerido</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Precios</td>
+                        <td>Escalonados según volumen</td>
+                        <td>Validación automática</td>
+                    </tr>
+
+                    <tr>
+                        <td>Crédito</td>
+                        <td>Sujeto a disponibilidad</td>
+                        <td>Evaluación previa</td>
+                    </tr>
+
+                    <tr>
+                        <td>Pago</td>
+                        <td>Contado / Net 30 / Net 60 / Net 90</td>
+                        <td>Aprobación comercial</td>
+                    </tr>
+
+                    <tr>
+                        <td>Garantía</td>
+                        <td>Según condiciones del producto</td>
+                        <td>Registro del caso</td>
+                    </tr>
+
+                    <tr>
+                        <td>SLA</td>
+                        <td>Según prioridad</td>
+                        <td>Seguimiento operativo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>Canal de Ventas B2B — Sistema de gestión corporativa.</p>
+    <p id="systemStatus">Sistema operativo.</p>
+</footer>
+
+<script src="../js/canal-clientes.js"></script>
+
+</body>
+</html>

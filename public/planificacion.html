@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Horarios y Personal</title>
+</head>
+<body>
+
+    <header>
+        <h1>Sistema de Gestión de Horarios y Personal</h1>
+        <p>Administración de turnos, horarios, descansos y permisos.</p>
+    </header>
+
+    <main>
+
+        <!-- CHECKLIST -->
+        <section>
+            <h2>Checklist de Gestión</h2>
+
+            <fieldset>
+                <legend>Progreso del sistema</legend>
+
+                <ul id="checklist">
+                    <li>
+                        <label>
+                            <input
+                                type="checkbox"
+                                class="checklist-item"
+                                data-module="rotativos"
+                            >
+                            Planificar turnos rotativos
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input
+                                type="checkbox"
+                                class="checklist-item"
+                                data-module="fijos"
+                            >
+                            Asignar horarios fijos
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input
+                                type="checkbox"
+                                class="checklist-item"
+                                data-module="descansos"
+                            >
+                            Consultar días de descanso
+                        </label>
+                    </li>
+
+                    <li>
+                        <label>
+                            <input
+                                type="checkbox"
+                                class="checklist-item"
+                                data-module="permisos"
+                            >
+                            Gestionar permisos especiales
+                        </label>
+                    </li>
+                </ul>
+
+                <p id="progreso">Progreso: 0% (0/4 completados)</p>
+            </fieldset>
+        </section>
+
+        <hr>
+
+        <!-- EMPLEADOS -->
+        <section>
+            <h2>Gestión de empleados</h2>
+
+            <form id="formEmpleado">
+                <fieldset>
+                    <legend>Registrar empleado</legend>
+
+                    <p>
+                        <label for="empleadoNombre">Nombre completo:</label>
+                        <input
+                            type="text"
+                            id="empleadoNombre"
+                            required
+                        >
+                    </p>
+
+                    <p>
+                        <label for="empleadoIdentificacion">Identificación:</label>
+                        <input
+                            type="text"
+                            id="empleadoIdentificacion"
+                            required
+                        >
+                    </p>
+
+                    <p>
+                        <label for="empleadoCargo">Cargo:</label>
+                        <input
+                            type="text"
+                            id="empleadoCargo"
+                            required
+                        >
+                    </p>
+
+                    <button type="submit">Registrar empleado</button>
+                </fieldset>
+            </form>
+
+            <h3>Empleados registrados</h3>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Identificación</th>
+                        <th>Cargo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaEmpleados"></tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <!-- TURNOS ROTATIVOS -->
+        <section>
+            <h2>1. Planificar turnos rotativos</h2>
+
+            <form id="formRotacion">
+                <fieldset>
+                    <legend>Asignar rotación</legend>
+
+                    <p>
+                        <label for="rotacionEmpleado">Empleado:</label>
+                        <select id="rotacionEmpleado" required>
+                            <option value="">Seleccione un empleado</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="rotacionTurno">Turno inicial:</label>
+                        <select id="rotacionTurno" required>
+                            <option value="Mañana">Mañana</option>
+                            <option value="Tarde">Tarde</option>
+                            <option value="Noche">Noche</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="rotacionFecha">Fecha de inicio:</label>
+                        <input
+                            type="date"
+                            id="rotacionFecha"
+                            required
+                        >
+                    </p>
+
+                    <p>
+                        <label for="rotacionFrecuencia">Frecuencia:</label>
+                        <select id="rotacionFrecuencia" required>
+                            <option value="semanal">Semanal</option>
+                            <option value="quincenal">Quincenal</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="rotacionPeriodos">
+                            Cantidad de períodos a simular:
+                        </label>
+
+                        <input
+                            type="number"
+                            id="rotacionPeriodos"
+                            min="1"
+                            max="20"
+                            value="8"
+                            required
+                        >
+                    </p>
+
+                    <button type="submit">
+                        Generar calendario rotativo
+                    </button>
+                </fieldset>
+            </form>
+
+            <h3>Calendario de turnos rotativos</h3>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Período</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha fin</th>
+                        <th>Turno</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaRotaciones"></tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <!-- HORARIOS FIJOS -->
+        <section>
+            <h2>2. Asignar horarios fijos</h2>
+
+            <form id="formHorarioFijo">
+                <fieldset>
+                    <legend>Nuevo horario fijo</legend>
+
+                    <p>
+                        <label for="horarioEmpleado">Empleado:</label>
+                        <select id="horarioEmpleado" required>
+                            <option value="">Seleccione un empleado</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="horaEntrada">Hora de entrada:</label>
+                        <input
+                            type="time"
+                            id="horaEntrada"
+                            required
+                        >
+                    </p>
+
+                    <p>
+                        <label for="horaSalida">Hora de salida:</label>
+                        <input
+                            type="time"
+                            id="horaSalida"
+                            required
+                        >
+                    </p>
+
+                    <fieldset>
+                        <legend>Días aplicables</legend>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Lunes"
+                            >
+                            Lunes
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Martes"
+                            >
+                            Martes
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Miércoles"
+                            >
+                            Miércoles
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Jueves"
+                            >
+                            Jueves
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Viernes"
+                            >
+                            Viernes
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Sábado"
+                            >
+                            Sábado
+                        </label>
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="dia"
+                                value="Domingo"
+                            >
+                            Domingo
+                        </label>
+                    </fieldset>
+
+                    <br>
+
+                    <button type="submit">
+                        Asignar horario fijo
+                    </button>
+                </fieldset>
+            </form>
+
+            <h3>Horarios fijos actuales</h3>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Entrada</th>
+                        <th>Salida</th>
+                        <th>Días</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaHorarios"></tbody>
+            </table>
+        </section>
+
+        <hr>
+
+        <!-- DESCANSOS -->
+        <section>
+            <h2>3. Consultar días de descanso</h2>
+
+            <fieldset>
+                <legend>Buscar descansos</legend>
+
+                <p>
+                    <label for="descansoEmpleado">
+                        Seleccione un empleado:
+                    </label>
+
+                    <select id="descansoEmpleado">
+                        <option value="">Seleccione un empleado</option>
+                    </select>
+                </p>
+
+                <button type="button" id="btnConsultarDescansos">
+                    Consultar descansos
+                </button>
+            </fieldset>
+
+            <h3>Días de descanso programados</h3>
+
+            <div id="resultadoDescansos">
+                <p>Seleccione un empleado para consultar sus descansos.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <!-- PERMISOS -->
+        <section>
+            <h2>4. Gestionar permisos especiales</h2>
+
+            <form id="formPermiso">
+                <fieldset>
+                    <legend>Solicitar permiso</legend>
+
+                    <p>
+                        <label for="permisoEmpleado">Empleado:</label>
+
+                        <select id="permisoEmpleado" required>
+                            <option value="">Seleccione un empleado</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="permisoTipo">Tipo de permiso:</label>
+
+                        <select id="permisoTipo" required>
+                            <option value="Médico">Médico</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Vacacional">Vacacional</option>
+                        </select>
+                    </p>
+
+                    <p>
+                        <label for="permisoInicio">Fecha de inicio:</label>
+
+                        <input
+                            type="date"
+                            id="permisoInicio"
+                            required
+                        >
+                    </p>
+
+                    <p>
+                        <label for="permisoFin">Fecha de fin:</label>
+
+                        <input
+                            type="date"
+                            id="permisoFin"
+                            required
+                        >
+                    </p>
+
+                    <p>
+                        <label for="permisoEstado">Estado inicial:</label>
+
+                        <select id="permisoEstado">
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Aprobado">Aprobado</option>
+                            <option value="Rechazado">Rechazado</option>
+                        </select>
+                    </p>
+
+                    <button type="submit">
+                        Registrar solicitud
+                    </button>
+                </fieldset>
+            </form>
+
+            <h3>Permisos registrados</h3>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Empleado</th>
+                        <th>Tipo</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaPermisos"></tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>Sistema de Gestión de Horarios y Personal</p>
+        <p>Aplicación desarrollada con HTML5 y JavaScript Vanilla.</p>
+    </footer>
+
+    <script src="../js/planificacion.js"></script>
+
+</body>
+</html>

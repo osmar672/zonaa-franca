@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión de Zonas Francas</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Sistema de Gestión de Zonas Francas</h1>
+
+        <nav>
+            <button type="button" onclick="mostrarVista('parametros')">
+                Parámetros
+            </button>
+
+            <button type="button" onclick="mostrarVista('postulacion')">
+                Nueva Postulación
+            </button>
+
+            <button type="button" onclick="mostrarVista('seguimiento')">
+                Seguimiento
+            </button>
+        </nav>
+
+        <hr>
+    </header>
+
+
+    <main>
+
+        <!-- =====================================================
+             MÓDULO 1: PARÁMETROS DE ADMINISTRACIÓN
+             ===================================================== -->
+
+        <section id="parametros">
+
+            <h2>1. Parámetros de Zona Franca</h2>
+
+            <form id="formParametro">
+
+                <input type="hidden" id="parametroId">
+
+                <p>
+                    <label for="nombreZona">
+                        Nombre de la Zona Franca:
+                    </label>
+                    <br>
+                    <input
+                        type="text"
+                        id="nombreZona"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="inversionMinima">
+                        Umbral de Inversión Mínima:
+                    </label>
+                    <br>
+                    <input
+                        type="number"
+                        id="inversionMinima"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="empleosMinimos">
+                        Empleos Mínimos:
+                    </label>
+                    <br>
+                    <input
+                        type="number"
+                        id="empleosMinimos"
+                        min="0"
+                        step="1"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="sectoresAutorizados">
+                        Sectores Autorizados:
+                    </label>
+                    <br>
+
+                    <textarea
+                        id="sectoresAutorizados"
+                        rows="4"
+                        placeholder="Tecnología, Manufactura, Servicios"
+                        required
+                    ></textarea>
+                </p>
+
+                <button type="submit">
+                    Guardar Parámetro
+                </button>
+
+                <button
+                    type="button"
+                    onclick="limpiarFormularioParametro()"
+                >
+                    Limpiar
+                </button>
+
+            </form>
+
+
+            <h3>Parámetros Registrados</h3>
+
+            <table border="1">
+
+                <thead>
+                    <tr>
+                        <th>Zona Franca</th>
+                        <th>Inversión Mínima</th>
+                        <th>Empleos Mínimos</th>
+                        <th>Sectores</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaParametros"></tbody>
+
+            </table>
+
+        </section>
+
+
+        <!-- =====================================================
+             MÓDULO 2: FORMULARIO DE POSTULACIÓN
+             ===================================================== -->
+
+        <section id="postulacion" hidden>
+
+            <h2>2. Formulario de Postulación</h2>
+
+            <form id="formPostulacion">
+
+                <p>
+                    <label for="zonaPostulacion">
+                        Zona Franca:
+                    </label>
+                    <br>
+
+                    <select
+                        id="zonaPostulacion"
+                        required
+                    >
+                        <option value="">
+                            Seleccione una zona
+                        </option>
+                    </select>
+                </p>
+
+
+                <p>
+                    <label for="nombreEmpresa">
+                        Nombre de la Empresa:
+                    </label>
+                    <br>
+
+                    <input
+                        type="text"
+                        id="nombreEmpresa"
+                        required
+                    >
+                </p>
+
+
+                <p>
+                    <label for="montoInvertir">
+                        Monto a Invertir:
+                    </label>
+                    <br>
+
+                    <input
+                        type="number"
+                        id="montoInvertir"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+                </p>
+
+
+                <p>
+                    <label for="empleosProyectados">
+                        Empleos Proyectados:
+                    </label>
+                    <br>
+
+                    <input
+                        type="number"
+                        id="empleosProyectados"
+                        min="0"
+                        step="1"
+                        required
+                    >
+                </p>
+
+
+                <p>
+                    <label for="sectorPostulacion">
+                        Sector:
+                    </label>
+                    <br>
+
+                    <select
+                        id="sectorPostulacion"
+                        required
+                    >
+                        <option value="">
+                            Primero seleccione una zona
+                        </option>
+                    </select>
+                </p>
+
+
+                <!-- =================================================
+                     MÓDULO 3: CARGA DE ARCHIVOS
+                     ================================================= -->
+
+                <fieldset>
+
+                    <legend>
+                        Documentación Legal/Fiscal
+                    </legend>
+
+                    <p>
+                        <label for="documento">
+                            Adjuntar documento PDF:
+                        </label>
+                        <br>
+
+                        <input
+                            type="file"
+                            id="documento"
+                            accept="application/pdf,.pdf"
+                        >
+                    </p>
+
+                    <p id="mensajeArchivo"></p>
+
+                </fieldset>
+
+
+                <p>
+                    <button type="submit">
+                        Registrar Postulación
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="limpiarFormularioPostulacion()"
+                    >
+                        Limpiar
+                    </button>
+                </p>
+
+            </form>
+
+
+            <p id="mensajePostulacion"></p>
+
+        </section>
+
+
+        <!-- =====================================================
+             MÓDULO 4: CONSULTA Y SEGUIMIENTO
+             ===================================================== -->
+
+        <section id="seguimiento" hidden>
+
+            <h2>3. Consulta y Seguimiento de Postulaciones</h2>
+
+            <p>
+                Listado de postulaciones registradas.
+            </p>
+
+            <table border="1">
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Empresa</th>
+                        <th>Zona Franca</th>
+                        <th>Inversión</th>
+                        <th>Empleos</th>
+                        <th>Sector</th>
+                        <th>Documento</th>
+                        <th>Estado</th>
+                        <th>Cambiar Estado</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="tablaPostulaciones"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <hr>
+
+        <p>
+            Prototipo de gestión de postulaciones para Zonas Francas.
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript externo -->
+    <script src="../js/solicitudes-intalacion.js"></script>
+
+</body>
+</html>
