@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Catálogo Público y Seguimiento</title>
+</head>
+<body>
+
+  <header>
+    <h1>Arenal Trade Zone - Portal de Clientes</h1>
+    <p>Catálogo web de productos exentos de impuestos en Zona Franca</p>
+  </header>
+
+  <!-- 1. Explorar Productos -->
+  <section>
+    <h2>Catálogo de Productos</h2>
+    <div id="productCatalog"></div>
+  </section>
+
+  <hr>
+
+  <!-- 2. Carrito de Compras -->
+  <section>
+    <h2>Carrito de Compras</h2>
+    <ul id="cartItems">
+      <li>El carrito está vacío.</li>
+    </ul>
+    <p><strong>Total: $<span id="cartTotal">0.00</span></strong></p>
+  </section>
+
+  <hr>
+
+  <!-- 3. Pagar en Línea -->
+  <section>
+    <h2>Pago en Línea (Pasarela ZF)</h2>
+    <div>
+      <label for="clientName">Nombre del Cliente / Empresa:</label>
+      <input type="text" id="clientName" value="Importadora El Sol S.A.">
+    </div>
+
+    <div>
+      <label for="cardNumber">Número de Tarjeta:</label>
+      <input type="text" id="cardNumber" placeholder="4000 0000 0000 0000" value="4532 1122 3344 5566">
+    </div>
+
+    <button onclick="processOnlinePayment()">Pagar Pedido</button>
+  </section>
+
+  <hr>
+
+  <!-- 4. Seguimiento de Compras -->
+  <section>
+    <h2>Seguimiento de Pedidos</h2>
+    <div>
+      <label for="trackingInput">Número de Guía / Pedido:</label>
+      <input type="text" id="trackingInput" placeholder="Ej: ATZ-ORDER-101">
+      <button onclick="trackOrder()">Consultar Estado</button>
+    </div>
+
+    <h3>Estado del Pedido:</h3>
+    <div id="trackingStatus">Ingrese un código para consultar.</div>
+  </section>
+
+  <hr>
+
+  <!-- Consola de Notificaciones -->
+  <section>
+    <h2>Registro de Actividad</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/catalogo.js"></script>
+</body>
+</html>
