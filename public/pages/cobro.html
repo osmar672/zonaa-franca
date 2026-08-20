@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Pasarelas y Canales de Cobro</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Módulo de Cobros y Conciliación</h1>
+
+  <!-- 1. Definir pasarelas de pago a integrar -->
+  <section>
+    <h2>Pasarelas de Pago Integradas</h2>
+    <label for="gatewaySelect">Pasarela de Pago:</label>
+    <select id="gatewaySelect">
+      <option value="STRIPE_GLOBAL">Stripe Global (Digital)</option>
+      <option value="BAC_CREDOMATIC">BAC Credomatic POS/VPOS (Físico/Digital)</option>
+      <option value="PAYPAL_BIZ">PayPal Commerce (Digital)</option>
+    </select>
+  </section>
+
+  <hr>
+
+  <!-- 2. Definir canales de cobro físicos y digitales -->
+  <section>
+    <h2>Datos de la Transacción</h2>
+
+    <div>
+      <label for="channelSelect">Canal de Cobro:</label>
+      <select id="channelSelect">
+        <option value="FISICO">Canal Físico (Terminal POS / Ventanilla ZF)</option>
+        <option value="DIGITAL">Canal Digital (Portal Web / API ERP)</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="paymentMethod">Método de Pago:</label>
+      <select id="paymentMethod">
+        <option value="TARJETA">Tarjeta (Débito/Crédito)</option>
+        <option value="TRANSFERENCIA">Transferencia Bancaria / SINPE</option>
+        <option value="EFECTIVO">Efectivo (Ventanilla)</option>
+        <option value="CREDITO">Crédito Comercial (Línea ZF)</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="amount">Monto ($):</label>
+      <input type="number" id="amount" value="1500.00">
+    </div>
+
+    <div>
+      <label for="referenceCode">Referencia / No. Comprobante:</label>
+      <input type="text" id="referenceCode" value="REF-ATZ-9982">
+    </div>
+
+    <div>
+      <label for="creditDays">Días de Crédito (Solo Método Crédito):</label>
+      <input type="number" id="creditDays" value="30">
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 3, 4, 5 & 6. Probar y Validar cobros (Tarjetas, Transferencias, Efectivo, Crédito) -->
+  <section>
+    <h2>Pruebas y Validaciones de Transacciones</h2>
+    <button onclick="processTransaction()">Probar Transacción</button>
+    <button onclick="verifyConciliation()">Verificar Conciliación de Pagos</button>
+  </section>
+
+  <hr>
+
+  <!-- 7. Documentación del Flujo de Integración -->
+  <section>
+    <h2>Documentación del Flujo de Integración</h2>
+    <button onclick="showDocumentation()">Ver Documentación del Flujo</button>
+    <pre id="docContainer"></pre>
+  </section>
+
+  <hr>
+
+  <!-- Consola de Resultados y Salida -->
+  <section>
+    <h2>Registro de Eventos y Conciliación</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/cobro.js"></script>
+</body>
+</html>
