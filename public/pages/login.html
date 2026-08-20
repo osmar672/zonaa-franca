@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Arenal Trade Zone</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone</h1>
+
+  <!-- NAVEGACIÓN DE SECCIONES -->
+  <div>
+    <button onclick="mostrarSeccion('sec-login')">Inicio de Sesión</button>
+    <button onclick="mostrarSeccion('sec-recuperar')">Recuperar Credenciales</button>
+    <button onclick="mostrarSeccion('sec-admin')">Panel de Administración</button>
+  </div>
+
+  <hr>
+
+  <!-- SECCIÓN 1: LOGIN -->
+  <div id="sec-login">
+    <h2>Inicio de Sesión</h2>
+    <form id="form-login" onsubmit="validarLogin(event)">
+      <div>
+        <label>Tipo de perfil:</label>
+        <select id="login-tipo">
+          <option value="Empleado">Empleado</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+      </div>
+      <div>
+        <label>Correo Electrónico:</label>
+        <input type="email" id="login-correo" required>
+      </div>
+      <div>
+        <label>Contraseña:</label>
+        <input type="password" id="login-password" required>
+      </div>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+  </div>
+
+  <!-- SECCIÓN 2: RECUPERAR CREDENCIALES -->
+  <div id="sec-recuperar" style="display:none;">
+    <h2>Recuperar Credenciales</h2>
+    <form onsubmit="recuperarCredenciales(event)">
+      <div>
+        <label>Correo Electrónico registrado:</label>
+        <input type="email" id="recuperar-correo" required>
+      </div>
+      <button type="submit">Enviar Enlace de Recuperación</button>
+    </form>
+  </div>
+
+  <!-- SECCIÓN 3: ADMINISTRACIÓN (ALTAS, BAJAS, ROLES, PERMISOS) -->
+  <div id="sec-admin" style="display:none;">
+    <h2>Panel de Administración</h2>
+    
+    <h3>Dar de Alta Usuario</h3>
+    <form onsubmit="darDeAltaUsuario(event)">
+      <div>
+        <label>Nombre Completo:</label>
+        <input type="text" id="alta-nombre" required>
+      </div>
+      <div>
+        <label>Correo Electrónico:</label>
+        <input type="email" id="alta-correo" required>
+      </div>
+      <div>
+        <label>Asignar Rol:</label>
+        <select id="alta-rol">
+          <option value="Usuario">Usuario</option>
+          <option value="Administrador">Administrador</option>
+        </select>
+      </div>
+      <div>
+        <label>Asignar Permisos:</label>
+        <select id="alta-permiso">
+          <option value="Lectura">Lectura</option>
+          <option value="Lectura y Escritura">Lectura y Escritura</option>
+          <option value="Acceso Total">Acceso Total</option>
+        </select>
+      </div>
+      <button type="submit">Dar de Alta</button>
+    </form>
+
+    <br>
+    <h3>Gestión de Usuarios (Bajas, Roles y Permisos)</h3>
+    <table border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Rol</th>
+          <th>Permiso</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-usuarios"></tbody>
+    </table>
+  </div>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>
