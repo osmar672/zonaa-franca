@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Directorio de Proveedores</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Directorio de Proveedores</h1>
+
+        <p>
+            Gestión centralizada de proveedores, contactos,
+            condiciones comerciales e información operativa.
+        </p>
+    </header>
+
+
+    <main>
+
+        <!-- ==========================================
+             REGISTRO DE PROVEEDORES
+        =========================================== -->
+
+        <section>
+
+            <h2>Registrar proveedor</h2>
+
+            <form id="formProveedor">
+
+                <div>
+                    <label for="nombre">
+                        Nombre del proveedor
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="categoria">
+                        Categoría
+                    </label>
+
+                    <input
+                        type="text"
+                        id="categoria"
+                        name="categoria"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="ciudad">
+                        Ciudad
+                    </label>
+
+                    <input
+                        type="text"
+                        id="ciudad"
+                        name="ciudad"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="telefono">
+                        Teléfono
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        name="telefono"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="estado">
+                        Estado
+                    </label>
+
+                    <select
+                        id="estado"
+                        name="estado"
+                        required
+                    >
+                        <option value="">
+                            Seleccionar estado
+                        </option>
+
+                        <option value="Activo">
+                            Activo
+                        </option>
+
+                        <option value="Inactivo">
+                            Inactivo
+                        </option>
+
+                        <option value="Suspendido">
+                            Suspendido
+                        </option>
+                    </select>
+                </div>
+
+
+                <button type="submit">
+                    Registrar proveedor
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- ==========================================
+             BUSCADOR Y FILTROS
+        =========================================== -->
+
+        <section>
+
+            <h2>Buscar y filtrar proveedores</h2>
+
+
+            <div>
+
+                <label for="buscar">
+                    Buscar proveedor
+                </label>
+
+                <input
+                    type="search"
+                    id="buscar"
+                    placeholder="Nombre, correo o teléfono..."
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="filtroCategoria">
+                    Filtrar por categoría
+                </label>
+
+                <input
+                    type="text"
+                    id="filtroCategoria"
+                    placeholder="Ejemplo: Componentes"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="filtroCiudad">
+                    Filtrar por ciudad
+                </label>
+
+                <input
+                    type="text"
+                    id="filtroCiudad"
+                    placeholder="Ejemplo: San José"
+                >
+
+            </div>
+
+
+            <div>
+
+                <label for="filtroEstado">
+                    Filtrar por estado
+                </label>
+
+                <select id="filtroEstado">
+
+                    <option value="">
+                        Todos los estados
+                    </option>
+
+                    <option value="Activo">
+                        Activo
+                    </option>
+
+                    <option value="Inactivo">
+                        Inactivo
+                    </option>
+
+                    <option value="Suspendido">
+                        Suspendido
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <br>
+
+
+            <button
+                type="button"
+                id="limpiarFiltros"
+            >
+                Limpiar filtros
+            </button>
+
+
+            <p id="contador">
+                0 proveedores encontrados
+            </p>
+
+
+            <!-- ==========================================
+                 LISTA DE PROVEEDORES
+            =========================================== -->
+
+            <div id="listaProveedores"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JavaScript externo -->
+
+    <script src="../js/pedidos.js"></script>
+
+</body>
+</html>

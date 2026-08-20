@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3 - Catálogo de Componentes, Materias Primas e Insumos</title>
+</head>
+
+<body>
+
+<header>
+    <h1>Catálogo de Componentes, Materias Primas e Insumos</h1>
+    <p>
+        Sistema de administración de recursos utilizados en la línea de producción.
+    </p>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#recursos">Recursos</a></li>
+        <li><a href="#unidades">Unidades de Medida</a></li>
+        <li><a href="#historial">Historial de Costos</a></li>
+        <li><a href="#respaldo">Respaldo de Datos</a></li>
+    </ul>
+</nav>
+
+<main>
+
+    <section id="recursos">
+        <h2>Catálogo de Recursos</h2>
+
+        <form id="recursoForm">
+
+            <input type="hidden" id="recursoId">
+
+            <fieldset>
+                <legend>Información del recurso</legend>
+
+                <p>
+                    <label for="sku">Código / SKU:</label>
+                    <input
+                        type="text"
+                        id="sku"
+                        name="sku"
+                        required
+                        maxlength="50"
+                        placeholder="Ej. MAT-001"
+                    >
+                </p>
+
+                <p>
+                    <label for="nombre">Nombre:</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                        maxlength="150"
+                    >
+                </p>
+
+                <p>
+                    <label for="descripcion">Descripción:</label>
+                    <textarea
+                        id="descripcion"
+                        name="descripcion"
+                        rows="4"
+                        maxlength="500"
+                    ></textarea>
+                </p>
+
+                <p>
+                    <label for="tipo">Tipo de recurso:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Seleccione...</option>
+                        <option value="Componente">Componente</option>
+                        <option value="Materia Prima">Materia Prima</option>
+                        <option value="Insumo">Insumo</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="unidad">Unidad de medida principal:</label>
+                    <select id="unidad" name="unidad" required>
+                        <option value="">Seleccione...</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label for="costoUnitario">Costo unitario:</label>
+                    <input
+                        type="number"
+                        id="costoUnitario"
+                        name="costoUnitario"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="stockMinimo">Stock mínimo:</label>
+                    <input
+                        type="number"
+                        id="stockMinimo"
+                        name="stockMinimo"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+                </p>
+
+                <p>
+                    <label for="estado">Estado:</label>
+                    <select id="estado" name="estado" required>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </p>
+            </fieldset>
+
+            <p>
+                <button type="submit" id="guardarRecurso">
+                    Registrar recurso
+                </button>
+
+                <button type="button" id="cancelarEdicion">
+                    Cancelar edición
+                </button>
+            </p>
+
+        </form>
+
+        <hr>
+
+        <section aria-labelledby="filtrosRecursos">
+            <h3 id="filtrosRecursos">Búsqueda y filtros</h3>
+
+            <p>
+                <label for="buscarRecurso">Buscar:</label>
+                <input
+                    type="search"
+                    id="buscarRecurso"
+                    placeholder="Buscar por SKU, nombre o descripción"
+                >
+            </p>
+
+            <p>
+                <label for="filtroTipo">Filtrar por tipo:</label>
+                <select id="filtroTipo">
+                    <option value="Todos">Todos</option>
+                    <option value="Componente">Componentes</option>
+                    <option value="Materia Prima">Materias Primas</option>
+                    <option value="Insumo">Insumos</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="filtroEstado">Filtrar por estado:</label>
+                <select id="filtroEstado">
+                    <option value="Todos">Todos</option>
+                    <option value="Activo">Activos</option>
+                    <option value="Inactivo">Inactivos</option>
+                </select>
+            </p>
+
+            <button type="button" id="limpiarFiltros">
+                Limpiar filtros
+            </button>
+        </section>
+
+        <h3>Recursos registrados</h3>
+
+        <p>
+            Total de recursos:
+            <strong id="totalRecursos">0</strong>
+        </p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>SKU</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Tipo</th>
+                    <th>Unidad</th>
+                    <th>Costo Unitario</th>
+                    <th>Stock Mínimo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaRecursos">
+            </tbody>
+        </table>
+
+    </section>
+
+    <hr>
+
+    <section id="unidades">
+        <h2>Control de Unidades de Medida</h2>
+
+        <form id="unidadForm">
+
+            <input type="hidden" id="unidadId">
+
+            <p>
+                <label for="codigoUnidad">Código:</label>
+                <input
+                    type="text"
+                    id="codigoUnidad"
+                    required
+                    maxlength="20"
+                    placeholder="Ej. KG"
+                >
+            </p>
+
+            <p>
+                <label for="nombreUnidad">Nombre:</label>
+                <input
+                    type="text"
+                    id="nombreUnidad"
+                    required
+                    maxlength="80"
+                    placeholder="Ej. Kilogramo"
+                >
+            </p>
+
+            <p>
+                <label for="descripcionUnidad">Descripción:</label>
+                <textarea
+                    id="descripcionUnidad"
+                    rows="3"
+                    maxlength="250"
+                ></textarea>
+            </p>
+
+            <p>
+                <label for="estadoUnidad">Estado:</label>
+                <select id="estadoUnidad">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+            </p>
+
+            <button type="submit">
+                Registrar unidad
+            </button>
+
+            <button type="button" id="cancelarUnidad">
+                Cancelar edición
+            </button>
+
+        </form>
+
+        <h3>Unidades registradas</h3>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaUnidades">
+            </tbody>
+        </table>
+
+    </section>
+
+    <hr>
+
+    <section id="historial">
+        <h2>Historial de Cambios de Costo</h2>
+
+        <p>
+            Seleccione un recurso para consultar sus modificaciones de costo.
+        </p>
+
+        <p>
+            <label for="recursoHistorial">
+                Recurso:
+            </label>
+
+            <select id="recursoHistorial">
+                <option value="">Seleccione un recurso...</option>
+            </select>
+        </p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>SKU</th>
+                    <th>Recurso</th>
+                    <th>Costo anterior</th>
+                    <th>Costo nuevo</th>
+                    <th>Diferencia</th>
+                </tr>
+            </thead>
+
+            <tbody id="tablaHistorial">
+            </tbody>
+        </table>
+
+    </section>
+
+    <hr>
+
+    <section id="respaldo">
+        <h2>Respaldo de Datos</h2>
+
+        <p>
+            Permite guardar o restaurar los datos almacenados localmente.
+        </p>
+
+        <button type="button" id="exportarDatos">
+            Exportar datos
+        </button>
+
+        <p>
+            <label for="importarDatos">
+                Importar archivo JSON:
+            </label>
+
+            <input
+                type="file"
+                id="importarDatos"
+                accept=".json,application/json"
+            >
+        </p>
+
+        <button type="button" id="eliminarDatos">
+            Eliminar todos los datos
+        </button>
+    </section>
+
+</main>
+
+<footer>
+    <p>
+        Sistema ERP - Módulo de Catálogo de Recursos de Producción
+    </p>
+</footer>
+
+<script src="../js/provedores.js"></script>
+
+</body>
+</html>
+
