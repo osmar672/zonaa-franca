@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Licencias Médicas y Cobertura de Turnos</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Control de Licencias e Incapacidades</h1>
+
+  <!-- 1. Registrar licencias médicas e incapacidades -->
+  <section>
+    <h2>Registrar Licencia Médica / Incapacidad</h2>
+    <div>
+      <label for="empId">ID de Empleado (Zona Franca):</label>
+      <input type="text" id="empId" value="ATZ-8841">
+    </div>
+
+    <div>
+      <label for="empName">Nombre del Trabajador:</label>
+      <input type="text" id="empName" value="Elena Rostova">
+    </div>
+
+    <div>
+      <label for="typeSelect">Tipo de Incidencia:</label>
+      <select id="typeSelect">
+        <option value="INCAPACIDAD_ENFERMEDAD">Incapacidad por Enfermedad</option>
+        <option value="INCAPACIDAD_ACCIDENTE">Incapacidad por Accidente Laboral</option>
+        <option value="LICENCIA_MATERNIDAD">Licencia de Maternidad/Paternidad</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="startDate">Fecha de Inicio:</label>
+      <input type="date" id="startDate" value="2026-08-20">
+    </div>
+
+    <div>
+      <label for="daysCount">Días de Incapacidad/Licencia:</label>
+      <input type="number" id="daysCount" value="5">
+    </div>
+
+    <div>
+      <label for="doctorNote">Folio / Dictamen Médico CCSS/INS:</label>
+      <input type="text" id="doctorNote" value="MED-2026-00991">
+    </div>
+
+    <button onclick="registerMedicalLeave()">Registrar Incidencia</button>
+  </section>
+
+  <hr>
+
+  <!-- 2. Controlar incapacidades y seguimiento -->
+  <section>
+    <h2>Control y Seguimiento de Incapacidades</h2>
+    <div>
+      <label for="leaveSelect">Seleccionar Registro:</label>
+      <select id="leaveSelect">
+        <option value="">No hay registros pendientes</option>
+      </select>
+    </div>
+
+    <button onclick="trackMedicalLeave()">Hacer Seguimiento</button>
+    
+    <h3>Detalle del Seguimiento:</h3>
+    <div id="trackingDetails">Seleccione un registro para evaluar.</div>
+  </section>
+
+  <hr>
+
+  <!-- 3. Ajustar nómina según incidencias -->
+  <section>
+    <h2>Ajuste de Nómina</h2>
+    <p>Calcular deducciones y subsidios según días de incapacidad registrados.</p>
+    <div>
+      <label for="baseSalary">Salario Base Mensual ($):</label>
+      <input type="number" id="baseSalary" value="1200.00">
+    </div>
+
+    <button onclick="adjustPayroll()">Ajustar Nómina</button>
+
+    <h3>Resultado del Ajuste de Nómina:</h3>
+    <pre id="payrollResult">Sin procesar.</pre>
+  </section>
+
+  <hr>
+
+  <!-- 4. Gestionar coberturas de turnos -->
+  <section>
+    <h2>Gestión Cobertura de Turnos</h2>
+    <div>
+      <label for="replacementEmp">Empleado Sustituto / Cobertura:</label>
+      <input type="text" id="replacementEmp" value="Marco Solís (ATZ-5012)">
+    </div>
+
+    <div>
+      <label for="shiftArea">Área / Posición a Cubrir:</label>
+      <input type="text" id="shiftArea" value="Línea de Ensamblaje B - Zona Franca">
+    </div>
+
+    <button onclick="manageShiftCoverage()">Asignar Cobertura de Turno</button>
+  </section>
+
+  <hr>
+
+  <!-- Consola de Auditoría -->
+  <section>
+    <h2>Registro de Eventos de RRHH</h2>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/licencia.js"></script>
+</body>
+</html>
