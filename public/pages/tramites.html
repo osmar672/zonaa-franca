@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arenal Trade Zone - Trámite de Documentos Laborales</title>
+</head>
+<body>
+
+  <h1>Arenal Trade Zone - Módulo de Trámites y Certificados Laborales</h1>
+
+  <!-- 1. Solicitar y Definir Tipo de Documento -->
+  <section>
+    <h2> Definir Tipo de Documento y Requisitos</h2>
+    <div>
+      <label for="empId">ID de Empleado (Zona Franca):</label>
+      <input type="text" id="empId" value="ATZ-4092">
+    </div>
+
+    <div>
+      <label for="empName">Nombre Completo:</label>
+      <input type="text" id="empName" value="Carlos Mendoza Alvarado">
+    </div>
+
+    <div>
+      <label for="docType">Tipo de Documento a Tramitar:</label>
+      <select id="docType" onchange="validateRequirements()">
+        <option value="CARTA_PATRONAL">Carta Patronal</option>
+        <option value="CONSTANCIA_INGRESOS">Constancia de Ingresos</option>
+        <option value="CERTIFICADO_TRABAJO">Certificado de Trabajo</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="targetInstitution">Institución / Destinatario:</label>
+      <input type="text" id="targetInstitution" value="Banco Nacional de Costa Rica">
+    </div>
+
+    <h3>Requisitos del Documento</h3>
+    <div id="requirementsBox"></div>
+  </section>
+
+  <hr>
+
+  <!-- 2. Revisar Datos y Emitir Documento -->
+  <section>
+    <h2>Revisar Datos y Emisión de Documentos</h2>
+    <button onclick="reviewEmployeeData()">Revisar Datos del Empleado</button>
+    <div id="employeeDataPreview"></div>
+
+    <br>
+
+    <div>
+      <button onclick="issueDocument('CARTA_PATRONAL')">Emitir Carta Patronal</button>
+      <button onclick="issueDocument('CONSTANCIA_INGRESOS')">Emitir Constancia de Ingresos</button>
+      <button onclick="issueDocument('CERTIFICADO_TRABAJO')">Emitir Certificado de Trabajo</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- 3. Verificación, Previsualización y Descarga -->
+  <section>
+    <h2>Verificación, Descarga y Notificación</h2>
+    <button onclick="verifyFormatAndContent()">Verificar Formato y Contenido</button>
+    
+    <h3>Previsualización del Documento:</h3>
+    <pre id="documentViewer" style="border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">No hay ningún documento emitido.</pre>
+
+    <div>
+      <button onclick="downloadOrPrintDocument()">Permitir Descarga / Impresión</button>
+      <button onclick="notifyEmployee()">Notificar al Empleado (Email/SMS)</button>
+    </div>
+  </section>
+
+  <hr>
+
+  <!-- Registro de Trámites -->
+  <section>
+    <h2>Registro de Trámites Realizados (Auditoría RRHH)</h2>
+    <table border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Código Trámite</th>
+          <th>Empleado</th>
+          <th>Documento</th>
+          <th>Destino</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="auditTableBody">
+      </tbody>
+    </table>
+    
+    <h3>Consola de Eventos:</h3>
+    <div id="logConsole"></div>
+  </section>
+
+  <script src="../js/tramites.js"></script>
+</body>
+</html>
