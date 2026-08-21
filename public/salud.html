@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Módulo de Salud Ocupacional y Enfermería</title>
+</head>
+<body>
+
+    <h1>Módulo de Salud Ocupacional y Enfermería</h1>
+    <p>Módulo para la programación, atención y registro de consultas en el área de salud ocupacional o enfermería de la empresa.</p>
+
+    <hr>
+
+    <h2>Checklist de Seguimiento</h2>
+    <p>Progreso: <strong id="porcentaje">0%</strong></p>
+    <progress id="barra-progreso" value="0" max="100"></progress>
+    <br><br>
+
+    <form id="checklist-form">
+        <label><input type="checkbox" class="chk-item"> Programación de consultas</label><br>
+        <label><input type="checkbox" class="chk-item"> Atención de consultas</label><br>
+        <label><input type="checkbox" class="chk-item"> Registro de consultas</label><br>
+        <label><input type="checkbox" class="chk-item"> Gestión de salud ocupacional</label><br>
+        <label><input type="checkbox" class="chk-item"> Gestión de enfermería</label><br>
+        <label><input type="checkbox" class="chk-item"> Validar funcionamiento del módulo</label><br>
+        <label><input type="checkbox" class="chk-item"> Revisar captura de datos</label><br>
+        <label><input type="checkbox" class="chk-item"> Verificar almacenamiento de registros</label><br><br>
+        <button type="button" id="btn-eliminar">Eliminar / Reiniciar Selección</button>
+    </form>
+
+    <hr>
+
+    <h2>1. Programación y Registro de Consulta</h2>
+    <form id="form-consulta">
+        <fieldset>
+            <legend>Datos del Paciente y Cita</legend>
+            <label for="empleado">Nombre del Empleado:</label><br>
+            <input type="text" id="empleado" required><br><br>
+
+            <label for="tipo">Área de Atención:</label><br>
+            <select id="tipo">
+                <option value="Salud Ocupacional">Salud Ocupacional</option>
+                <option value="Enfermería">Enfermería</option>
+            </select><br><br>
+
+            <label for="fecha">Fecha y Hora:</label><br>
+            <input type="datetime-local" id="fecha" required><br><br>
+
+            <label for="motivo">Motivo de Consulta / Atención:</label><br>
+            <textarea id="motivo" rows="3" required></textarea><br><br>
+
+            <button type="submit">Guardar Registro</button>
+        </fieldset>
+    </form>
+
+    <hr>
+
+    <h2>2. Almacenamiento y Registro de Consultas</h2>
+    <button type="button" id="btn-exportar-csv">Exportar Tabla a CSV</button>
+    <br><br>
+
+    <table border="1" id="tabla-consultas">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Empleado</th>
+                <th>Área</th>
+                <th>Fecha</th>
+                <th>Motivo</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-registros">
+            <!-- Se llena dinámicamente desde script.js -->
+        </tbody>
+    </table>
+
+    <!-- Vinculación del archivo JavaScript -->
+    <script src="../js/salud.js"></script>
+</body>
+</html>
